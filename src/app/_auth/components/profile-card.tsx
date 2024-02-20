@@ -11,7 +11,7 @@ export const ProfileCard = () => {
   }
 
   return (
-    <div className="select-none flex flex-row flex-wrap gap-2 items-start p-2 border border-gray-800 rounded-lg">
+    <div className="select-none flex flex-row flex-wrap gap-2 items-start p-2">
       <Avatar>
         <AvatarImage src={data.user.image!} />
         <AvatarFallback>

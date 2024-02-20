@@ -16,18 +16,18 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center  text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Welcome to <span className="text-[hsl(280,100%,70%)]">Drawy</span> Studio
+          Welcome to <span className="text-[#63e]">Drawy</span> Studio
         </h1>
 
         {
           session ? (
             <Link
-              href="/dashboard"
+              href="/whiteboards"
               className="flex items-center transition ease-in group rounded-full text-white pl-4 pr-2 py-3 font-semibold no-underline "
             >
-              <AnimatedBagde>
-                <span className="group-hover:text-amber-400">Continue to dashboard </span>
-                <ChevronRight className="transition ease-out duration-200 group-hover:translate-x-1 group-hover:text-amber-400" />
+              <AnimatedBagde style="purple">
+                <span className="transition ease-in group-hover:text-[#63e]">Continue to dashboard </span>
+                <ChevronRight className="transition ease-out duration-200 group-hover:translate-x-1 group-hover:text-[#63e]" />
               </AnimatedBagde>
             </Link>) : (
             <SigninProviders />
