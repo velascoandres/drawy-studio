@@ -120,7 +120,7 @@ export const verificationTokens = createTable(
 export const whiteboard = createTable(
   'whiteboard',
   {
-    id: varchar('id', { length: 255 }).notNull().primaryKey(),
+    id: serial('id').primaryKey(),
     name: varchar('name').notNull(),
     createdById: varchar('userId', { length: 255 })
     .notNull()

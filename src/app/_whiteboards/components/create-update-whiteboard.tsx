@@ -11,7 +11,7 @@ import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/app/_s
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/app/_shared/components/ui/form'
 import { Input } from '@/app/_shared/components/ui/input'
 import { Textarea } from '@/app/_shared/components/ui/textarea'
-import { CreateWhiteboardDto } from '@/dtos/create-whiteboard.dto'
+import { CreateWhiteboardDto } from '@/dtos/whiteboard-dtos'
 
 
 export const CreateUpdateWhiteboard = () => {  
