@@ -33,10 +33,12 @@ const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, optio
     throw new NotAuthorized('User not related to whiteboard')
   }
 
-  return db.update(whiteboard).set({
+  const [updated] = await db.update(whiteboard).set({
     name,
     description,
   }).where(eq(whiteboard.id, id)).returning()
+
+  return updated
 }
 
 

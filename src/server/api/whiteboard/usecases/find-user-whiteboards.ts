@@ -8,10 +8,10 @@ import { whiteboard } from '@/server/db/schema'
 
 type Options = z.infer<typeof SearchDto> & {userId: string}
 
-const OFFSET_FACTOR = 10
+const DEFAULT_OFFSET_FACTOR = 10
 
 const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { search, userId, perPage = OFFSET_FACTOR, page } = options
+  const { search, userId, perPage = DEFAULT_OFFSET_FACTOR, page } = options
 
   const baseFilter = eq(whiteboard.createdById, userId)
 
@@ -30,7 +30,7 @@ const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, option
   const data = await db.query.whiteboard.findMany({
     where: baseFilter,
     limit: perPage,
-    offset: perPage * page
+    offset: perPage * (page - 1)
   })
 
   const count = countResponse?.count ?? 0
