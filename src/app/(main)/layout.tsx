@@ -11,7 +11,7 @@ const Layout = ({
 	children: React.ReactNode;
 }) => {
   return (
-    <div className="min-h-screen relative flex flex-col items-start justify-between overflow-y-auto">
+    <div className="min-h-screen relative flex flex-col items-start justify-between overflow-y-auto bg-background">
       <Navbar />
       <div className="w-full mt-[62px]">
         {children}

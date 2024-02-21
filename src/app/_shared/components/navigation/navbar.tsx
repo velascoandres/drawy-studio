@@ -6,13 +6,13 @@ import { ProfileCard } from '@/app/_auth/components/profile-card'
 
 export const Navbar = () => {
   return (
-    <nav className="fixed w-full flex flex-row justify-between px-4 items-center border border-transparent border-b-border bg-black">
+    <nav className="fixed w-full flex flex-row justify-between px-4 items-center border border-transparent border-b-border">
       <Link 
         href="/" 
-        className="self-start text-3xl font-bold py-3">
+        className="text-3xl font-bold py-3">
         <span className="text-[#63e]">D</span>S
       </Link>
-      <ul className="list-none flex gap-2 items-center">
+      <ul className="self-end list-none flex gap-2 items-center">
         <li>
           <Link href="/repo">
             <Github />

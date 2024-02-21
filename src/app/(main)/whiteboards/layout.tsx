@@ -11,7 +11,7 @@ export const Layout = ({
       children: React.ReactNode;
   }) => {
   return (
-    <ResizablePanelGroup direction="horizontal" className="bg-black">
+    <ResizablePanelGroup direction="horizontal">
       <ResizablePanel className="h-[calc(100dvh-62px)] px-3" defaultSize={15} minSize={15}>
         <WhiteboardList />  
       </ResizablePanel>
