@@ -13,8 +13,8 @@ type Options = z.infer<typeof UpdateWhiteboardContentDto> & {userId: string}
 
 
 const updateWhiteboardContent = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { id, content, userId } = options  
-
+  const { id, content, userId } = options
+  
   const currentWhiteboard = await db.query.whiteboard.findFirst({
     where: eq(whiteboard.id, id) 
   })

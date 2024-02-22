@@ -1,15 +1,30 @@
+'use client'
+
 import React from 'react'
 
-import { Whiteboard } from '@/app/_whiteboards/components/whiteboard'
+import { type Content, Whiteboard } from '@/app/_whiteboards/components/whiteboard'
+import { useWhiteboard } from '@/app/_whiteboards/hooks/use-whiteboard'
 
-const Page = () => {
+const WhiteboardPage = () => {
+  const { onChangeHandler, whiteboard } = useWhiteboard()
+
+
   return (
     <main className="h-full w-full">
-      <Whiteboard />
+      {
+        whiteboard && (
+          <Whiteboard
+            id={whiteboard?.id ?? 0} 
+            initialContent={whiteboard?.content as Content} 
+            onChange={onChangeHandler} 
+          />
+        )
+      }
+      
     </main>
   )
 }
 
 
-export default Page
+export default WhiteboardPage
 
