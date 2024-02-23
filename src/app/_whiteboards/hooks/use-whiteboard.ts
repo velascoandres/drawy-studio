@@ -1,6 +1,5 @@
 'use client'
 
-import { useParams } from 'next/navigation'
 import compare from 'just-compare'
 
 import { type ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
@@ -10,8 +9,7 @@ import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
 import { api } from '@/trpc/react'
 
 
-export const useWhiteboard = () => {
-  const params = useParams()
+export const useWhiteboard = (id: number) => {
   const utils = api.useUtils()
   
   const { mutate: updateContent } = api.whiteboard.updateUserWhiteboardContent.useMutation({
@@ -20,10 +18,11 @@ export const useWhiteboard = () => {
     }
   })
     
-  const { data: whiteboard } = api.whiteboard.findUserWhiteboardById.useQuery({
-    id: Number(params.id),
+  const { data: whiteboard, isLoading } = api.whiteboard.findUserWhiteboardById.useQuery({
+    id: Number(id),
   }, { 
-    enabled: Boolean(params.id), 
+    enabled: Boolean(id),
+    cacheTime: Infinity 
   })
 
   const debounce = useDebounceCallback(200)
@@ -82,6 +81,7 @@ export const useWhiteboard = () => {
 
 
   return {
+    isLoading,
     whiteboard,
     onChangeHandler
   }

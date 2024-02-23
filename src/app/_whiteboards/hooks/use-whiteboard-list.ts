@@ -4,15 +4,18 @@ import { api } from '@/trpc/react'
 
 import { CreateUpdateWhiteboard } from '../components/create-update-whiteboard'
 import { DeleteWhiteboard } from '../components/delete-whiteboard'
-import { useWhiteBoardStore } from '../store/whiteboard-store'
 
 
 const DEFAULT_PER_PAGE = 10
 
+interface Whiteboard {
+  id: number
+  name: string
+}
+
+
 export const useWhiteboardList = () => {
   const { openModal } = useModalStore()
-
-  const { selectWhiteboard, currentWhiteboard } = useWhiteBoardStore()
   const { searchParams, setParam, removeParam } = useQueryParams()
 
   const currentPage = Number(searchParams.get('page') ?? 1)
@@ -33,9 +36,6 @@ export const useWhiteboardList = () => {
   }
 
 
-
-  const handleSelect = selectWhiteboard
-
   const onPageChange = (newPage: number) => {
     setParam('page', newPage.toString())
   }
@@ -46,20 +46,20 @@ export const useWhiteboardList = () => {
     })
   }
 
-  const openUpdateWhiteboard = () => {
+  const openUpdateWhiteboard = (whiteboard: Whiteboard) => {
     openModal({
       component: CreateUpdateWhiteboard,
       props: {
-        whiteboard: currentWhiteboard
+        whiteboard: whiteboard
       }
     })
   }
 
-  const openRemoveWhiteboard = () => {
+  const openRemoveWhiteboard = (whiteboard: Whiteboard) => {
     openModal({
       component: DeleteWhiteboard,
       props: {
-        whiteboard: currentWhiteboard
+        whiteboard: whiteboard
       }
     })
   }
@@ -75,8 +75,6 @@ export const useWhiteboardList = () => {
     openUpdateWhiteboard,
     openRemoveWhiteboard,
     currentPage,
-    handleSelect,
     onPageChange,
-    currentWhiteboard
   }
 }
