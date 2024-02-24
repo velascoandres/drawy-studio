@@ -10,6 +10,7 @@ import {
 } from '@/server/api/trpc'
 
 import createWhiteboard from './usecases/create-whiteboard'
+import detachUserWhiteboardFromSpace from './usecases/detach-whiteboard-space'
 import findUserWhiteboardById from './usecases/find-user-whiteboard-by-id'
 import findUserWhiteboards from './usecases/find-user-whiteboards'
 import removeUserWhiteboard from './usecases/remove-user-whiteboard'
@@ -34,6 +35,11 @@ export const whiteboardRouter = createTRPCRouter({
   })),
   removeUserWhiteboard: protectedProcedure.input(SearchByIdDto)
   .mutation(({ ctx, input }) => removeUserWhiteboard(ctx.db, {
+    ...input,
+    userId: ctx.session.user.id
+  })),
+  detachWhiteboardFromSpace: protectedProcedure.input(SearchByIdDto)
+  .mutation(({ ctx, input }) => detachUserWhiteboardFromSpace(ctx.db, {
     ...input,
     userId: ctx.session.user.id
   })),

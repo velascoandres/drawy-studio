@@ -2,29 +2,34 @@ import { eq } from 'drizzle-orm'
 import { type PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 import { type z } from 'zod'
 
-import { type UpdateWhiteboardDto } from '@/dtos/whiteboard-dtos'
+import { type SearchByIdDto } from '@/dtos/shared-dtos'
 import type * as schema from '@/server/db/schema'
 import { whiteboards } from '@/server/db/schema'
 import { NotAuthorized } from '@/server/exceptions/not-authorized'
 import { NotFound } from '@/server/exceptions/not-found'
 
 
-type Options = z.infer<typeof UpdateWhiteboardDto> & {userId: string}
+type Options = z.infer<typeof SearchByIdDto> & {userId: string}
 
 
-const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { id, name, description, userId } = options
+const detachUserWhiteboardFromSpace = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
+  const { id, userId } = options
 
   const currentWhiteboard = await db.query.whiteboards.findFirst({
     where: (whiteboards, { eq }) => eq(whiteboards.id, id),
     columns: {
       id: true,
-      createdById: true
+      createdById: true,
+      spaceId: true,
     }
   })
 
   if (!currentWhiteboard){
     throw new NotFound('Whiteboard not found')
+  }
+
+  if (!currentWhiteboard.spaceId){
+    throw new NotFound('Whiteboard is not attached to a space')
   }
 
   const isOwner = currentWhiteboard?.createdById === userId
@@ -33,13 +38,14 @@ const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, optio
     throw new NotAuthorized('User not related to whiteboard')
   }
 
-  const [updated] = await db.update(whiteboards).set({
-    name,
-    description,
-  }).where(eq(whiteboards.id, id)).returning()
+  await db.update(whiteboards).set({
+    spaceId: null,
+  }).where(eq(whiteboards.id, id))
 
-  return updated
+  return {
+    ok: true
+  }
 }
 
 
-export default updateUserWhiteboard
+export default detachUserWhiteboardFromSpace

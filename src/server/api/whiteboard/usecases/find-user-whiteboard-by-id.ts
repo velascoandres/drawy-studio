@@ -11,7 +11,7 @@ type Options = z.infer<typeof SearchByIdDto> & {userId: string}
 const findUserWhiteboardById = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
   const { id, userId } = options
   
-  const currentWhiteboard = await db.query.whiteboard.findFirst({
+  const currentWhiteboard = await db.query.whiteboards.findFirst({
     where: (whiteboards, { eq }) => eq(whiteboards.id, id)
   })
 

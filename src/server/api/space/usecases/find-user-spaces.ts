@@ -4,28 +4,28 @@ import { type z } from 'zod'
 
 import { type SearchDto } from '@/dtos/shared-dtos'
 import type * as schema from '@/server/db/schema'
-import { whiteboards } from '@/server/db/schema'
+import { spaces } from '@/server/db/schema'
 
 type Options = z.infer<typeof SearchDto> & {userId: string}
 
 const DEFAULT_OFFSET_FACTOR = 10
 
-const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
+const findUserSpaces = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
   const { search, userId, perPage = DEFAULT_OFFSET_FACTOR, page } = options
 
-  let baseFilter = eq(whiteboards.createdById, userId)
+  let baseFilter = eq(spaces.createdById, userId)
 
   if (search){
     const searchExpression = `%${search}%`
 
-    const orCondition = or(ilike(whiteboards.name, searchExpression), ilike(whiteboards.description, searchExpression))
+    const orCondition = or(ilike(spaces.name, searchExpression), ilike(spaces.description, searchExpression))
 
     baseFilter = and(baseFilter, orCondition) as SQL<typeof schema>
   }
 
   const [countResponse] = await db.select({
-    count: sql<number>`cast(count(${whiteboards.id}) as int)`,
-  }).from(whiteboards).where(baseFilter)
+    count: sql<number>`cast(count(${spaces.id}) as int)`,
+  }).from(spaces).where(baseFilter)
 
   const data = await db.query.whiteboards.findMany({
     where: baseFilter,
@@ -43,4 +43,4 @@ const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, option
   
 }
 
-export default findUserWhiteboards
+export default findUserSpaces

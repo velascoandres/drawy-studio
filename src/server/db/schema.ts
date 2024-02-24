@@ -51,6 +51,8 @@ export const users = createTable('user', {
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  whiteboards: many(whiteboards),
+  space: many(spaces),
 }))
 
 export const accounts = createTable(
@@ -117,14 +119,15 @@ export const verificationTokens = createTable(
   })
 )
 
-export const whiteboard = createTable(
+export const whiteboards = createTable(
   'whiteboard',
   {
     id: serial('id').primaryKey(),
     name: varchar('name').notNull(),
     createdById: varchar('userId', { length: 255 })
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: 'cascade' }),
+    spaceId: integer('spaceId').references(() => spaces.id),
     description: varchar('description'),
     content: json('content').default({}),
     createdAt: timestamp('created_at')
@@ -134,5 +137,33 @@ export const whiteboard = createTable(
   },
   (whiteboard) => ({
     createdByIdIdx: index('whiteboard_createdById_idx').on(whiteboard.createdById),
+    spaceIdIdx: index('whiteboard_spaceId_idx').on(whiteboard.spaceId),
   })
 )
+
+
+export const spaces = createTable(
+  'space',
+  {
+    id: serial('id').primaryKey(),
+    name: varchar('name').notNull(),
+    createdById: varchar('userId', { length: 255 })
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+    description: varchar('description'),
+    createdAt: timestamp('created_at')
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+    style: json('style').default({}),
+    updatedAt: timestamp('updatedAt'),
+  },
+  (space) => ({
+    createdByIdIdx: index('space_createdById_idx').on(space.createdById),
+  })
+)
+
+export const spaceRelations = relations(spaces, ({ many }) => ({
+  whiteboards: many(whiteboards),
+}))
+
+

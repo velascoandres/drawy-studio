@@ -1,5 +1,6 @@
 import { createTRPCRouter } from '@/server/api/trpc'
 
+import { spaceRouter } from './space/router'
 import { whiteboardRouter } from './whiteboard/router'
 
 /**
@@ -8,7 +9,8 @@ import { whiteboardRouter } from './whiteboard/router'
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  whiteboard: whiteboardRouter
+  whiteboard: whiteboardRouter,
+  space: spaceRouter,
 })
 
 // export type definition of API
