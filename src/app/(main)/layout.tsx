@@ -3,7 +3,7 @@
 import React from 'react'
 
 import { withAuth } from '../_auth/components/with-auth'
-import { Navbar } from '../_shared/components/navigation/navbar'
+// import { Navbar } from '../_shared/components/navigation/navbar'
 
 const Layout = ({
   children,
@@ -12,10 +12,11 @@ const Layout = ({
 }) => {
   return (
     <div className="min-h-screen relative flex flex-col items-start justify-between overflow-y-auto bg-background">
-      <Navbar />
+      {/* <Navbar />
       <div className="w-full mt-[62px]">
         {children}
-      </div>
+      </div> */}
+      {children}
     </div>
   )
 }

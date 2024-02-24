@@ -4,6 +4,7 @@ import React from 'react'
 import { useParams } from 'next/navigation'
 
 import { type Content, Whiteboard } from '@/app/_whiteboards/components/whiteboard'
+import { WhiteboardNavigation } from '@/app/_whiteboards/components/whiteboard-navigation'
 import { useWhiteboard } from '@/app/_whiteboards/hooks/use-whiteboard'
 
 const WhiteboardPage = () => {
@@ -13,7 +14,7 @@ const WhiteboardPage = () => {
 
 
   return (
-    <main className="h-full w-full">
+    <main className="h-screen w-screen">
       {
         whiteboard && (
           <Whiteboard
@@ -23,7 +24,7 @@ const WhiteboardPage = () => {
           />
         )
       }
-      
+      <WhiteboardNavigation />
     </main>
   )
 }

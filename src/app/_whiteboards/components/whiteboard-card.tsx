@@ -13,7 +13,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Skeleton } from '@/app/_shared/components/ui/skeleton'
 import { IMAGES } from '@/constants/images'
 import { blobToBase64 } from '@/lib/blob-to-base64'
-import { cn } from '@/lib/utils'
 
 import { useWhiteboard } from '../hooks/use-whiteboard'
 
@@ -42,17 +41,19 @@ interface Content {
   }
 }
 
-const DEFAULT_DESCRIPTION = 'This whiteboard does not have any description'
-
 export const WhiteboardCard = ({ item, children }: ListItemProps) => {
   const { name, description } = item
 
   const [preview, setPreview] = useState<string>()
   const [loading, setLoading] = useState(true)
 
-  const { whiteboard } = useWhiteboard(item.id)
+  const { whiteboard, isLoading } = useWhiteboard(item.id)
 
   useEffect(() => {
+    if (isLoading){
+      return
+    }
+
     const content = whiteboard?.content as Content
 
     if (!content?.scene){
@@ -70,23 +71,24 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
     .then(blobToBase64)
     .then((file) => setPreview(file as string))
     .finally(() => setLoading(false))
-  }, [whiteboard])
+  }, [whiteboard, isLoading])
     
   return (
     <article 
-      className="max-w-xs max-h-[30rem] relative gap-4 flex flex-col items-start bg-neutral-800 break-words overflow-hidden text-ellipsis transition ease-in rounded-lg"         
+      className="h-[30rem] w-full md:max-w-sm  relative gap-4 flex flex-col items-start bg-neutral-800 break-words overflow-hidden text-ellipsis transition ease-in rounded-lg"         
     >
-      <Link href={`/whiteboards/${item.id}`} className="w-full h-full basis-3/4 rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
+      <Link href={`/whiteboards/${item.id}`} className="w-full h-full basis-3/4 rounded-none rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
         {
-          loading ? (<Skeleton className="bg-gray-500 w-[20rem] h-[20rem] rounded-none rounded-t-lg" />) : (
+          loading ? (<Skeleton className="bg-gray-500 w-[24rem] h-[25rem] rounded-none rounded-t-lg" />) : (
             preview ? (
               <Image 
                 src={preview} 
                 alt={item.name} 
                 width={100} 
                 height={150}
+                objectFit="cover"
                 content="cover"
-                className="transition ease-in w-full h-full rounded-t-lg hover:scale-110" 
+                className="transition ease-in w-full h-full rounded-none rounded-t-lg hover:scale-110 object-cover" 
               />
             ) : (
               <Image 
@@ -94,8 +96,8 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
                 alt={item.name} 
                 width={100} 
                 height={150}
-                content="cover"
-                className="transition ease-in w-full h-auto rounded-t-lg hover:scale-110" 
+                objectFit="cover"
+                className="transition ease-in w-full h-auto rounded-none rounded-t-lg hover:scale-110 object-cover" 
               />
             )
           )
@@ -103,13 +105,12 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
       </Link>
       <div className="basis-1/4 px-2 flex flex-col justify-between gap-2 mb-2 break-words text-ellipsis">
         <div className="flex flex-col gap-2">
-          <h4 className="font-semibold select-none flex items-center">
+          <h4 className="text-lg font-semibold select-none flex items-center line-clamp-1 text-ellipsis">
             {name}
           </h4>
-          <p className={cn('text-white/50 break-words text-ellipsis', {
-            'italic': !description 
-          })}>
-            {description ? description : DEFAULT_DESCRIPTION}
+
+          <p className="font-medium line-clamp-1 text-ellipsis">
+            {description}
           </p>
         </div>
 

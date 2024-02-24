@@ -22,7 +22,7 @@ export const useWhiteboard = (id: number) => {
     id: Number(id),
   }, { 
     enabled: Boolean(id),
-    cacheTime: Infinity 
+    cacheTime: Infinity, 
   })
 
   const debounce = useDebounceCallback(200)

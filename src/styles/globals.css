@@ -104,4 +104,16 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-indigo-700 rounded-2xl;
   }
+
+  header {
+    animation: nav-header-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+  
+  @keyframes nav-header-shadown {
+    to {
+      @apply shadow-lg backdrop-blur bg-gray-800/80;
+    }
+  }
 }
