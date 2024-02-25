@@ -102,18 +102,18 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-indigo-700 rounded-2xl;
+    @apply bg-gradient-to-br from-gray-900 to-indigo-950 rounded-2xl;
   }
 
   header {
     animation: nav-header-shadown 1s linear both;
     animation-timeline: scroll();
-    animation-range: 0 100px;
+    animation-range: 0 25px;
   }
   
   @keyframes nav-header-shadown {
     to {
-      @apply shadow-lg backdrop-blur bg-gray-800/80;
+      @apply shadow-lg backdrop-blur bg-gradient-to-br from-gray-900 to-indigo-950/80;
     }
   }
 }

@@ -27,7 +27,7 @@ const findUserSpaces = async (db: PostgresJsDatabase<typeof schema>, options: Op
     count: sql<number>`cast(count(${spaces.id}) as int)`,
   }).from(spaces).where(baseFilter)
 
-  const data = await db.query.whiteboards.findMany({
+  const data = await db.query.spaces.findMany({
     where: baseFilter,
     limit: perPage,
     offset: perPage * (page - 1)

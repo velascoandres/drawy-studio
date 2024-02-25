@@ -1,10 +1,7 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import { Plus } from 'lucide-react'
-
-import { ProfileCard } from '@/app/_auth/components/profile-card'
 
 import { Button } from '../ui/button'
 import { SearchBox } from '../ui/search-box'
@@ -40,16 +37,13 @@ export const ManagementPageLayout = ({
             <Plus className="w-auto md:h-auto" /> <span className="hidden md:block">{addLabel}</span>
           </Button>
         </div>
-
-        <ProfileCard />
       </header>
-      <section className="flex-1 px-4 pt-20 w-full">
+      <section className="flex-1 flex flex-col px-4 pt-20 w-full h-full">
         {children}
       </section>  
       <Button variant="secondary" onClick={onAddClick} className="bg-neutral-900 md:hidden fixed bottom-24 right-4 border border-white z-10 p-2 py-8 flex flex-row justify-center items-center rounded-full">
         <Plus className="w-12 h-12 md:hidden" /> <span className="hidden md:block">{addLabel}</span>
       </Button>
-
     </main>
   )
 }

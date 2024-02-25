@@ -1,4 +1,5 @@
-import { SearchByIdDto, SearchDto } from '@/dtos/shared-dtos'
+import { SearchByIdDto } from '@/dtos/shared-dtos'
+import { SearchUserSpaceDto } from '@/dtos/space-dtos'
 import { 
   CreateWhiteboardDto, 
   UpdateWhiteboardContentDto, 
@@ -43,7 +44,7 @@ export const whiteboardRouter = createTRPCRouter({
     ...input,
     userId: ctx.session.user.id
   })),
-  findUserWhiteboards: protectedProcedure.input(SearchDto)
+  findUserWhiteboards: protectedProcedure.input(SearchUserSpaceDto)
   .query(({ ctx, input }) => findUserWhiteboards(ctx.db, {
     ...input,
     userId: ctx.session.user.id

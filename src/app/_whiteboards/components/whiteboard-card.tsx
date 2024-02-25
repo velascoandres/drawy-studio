@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FilePenLine, Menu, Trash2 } from 'lucide-react'
+import { FilePenLine, Menu, Split, Trash2 } from 'lucide-react'
 
 import { type ExcalidrawElement, type NonDeleted } from '@excalidraw/excalidraw/types/element/types'
 import { type AppState, type BinaryFiles } from '@excalidraw/excalidraw/types/types'
@@ -15,22 +15,21 @@ import { IMAGES } from '@/constants/images'
 import { blobToBase64 } from '@/lib/blob-to-base64'
 
 import { useWhiteboard } from '../hooks/use-whiteboard'
+import { type  Whiteboard } from '../interfaces/whiteboard'
 
-interface WhiteboardItem {
-    id: number
-    name: string
-    description?: string | null
-}
 
 interface ListItemProps {
-    item: WhiteboardItem
-    onClick?: (item: WhiteboardItem) => void
-    children: React.ReactNode
+    whiteboard: Whiteboard
+    onClick?: (item: Whiteboard) => void
+    children?: React.ReactNode
 }
 
 interface WhiteboardActionsProps {
+  whiteboard: Whiteboard
+
   onClickDelete(): void
   onClickUpdate(): void
+  onClickDetach(): void
 }
 
 interface Content {
@@ -41,13 +40,13 @@ interface Content {
   }
 }
 
-export const WhiteboardCard = ({ item, children }: ListItemProps) => {
-  const { name, description } = item
+export const WhiteboardCard = ({ whiteboard: initialWhiteboardData, children }: ListItemProps) => {
+  const { name, description } = initialWhiteboardData
 
   const [preview, setPreview] = useState<string>()
   const [loading, setLoading] = useState(true)
 
-  const { whiteboard, isLoading } = useWhiteboard(item.id)
+  const { whiteboard, isLoading } = useWhiteboard(initialWhiteboardData.id)
 
   useEffect(() => {
     if (isLoading){
@@ -75,15 +74,15 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
     
   return (
     <article 
-      className="h-[30rem] w-full md:max-w-sm  relative gap-4 flex flex-col items-start bg-neutral-800 break-words overflow-hidden text-ellipsis transition ease-in rounded-lg"         
+      className="h-[30rem] w-full md:max-w-sm  relative gap-4 flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-lg"         
     >
-      <Link href={`/whiteboards/${item.id}`} className="w-full h-full basis-3/4 rounded-none rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
+      <Link href={`/whiteboard/${initialWhiteboardData.id}`} className="w-full h-full basis-3/4 rounded-none rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
         {
           loading ? (<Skeleton className="bg-gray-500 w-[24rem] h-[25rem] rounded-none rounded-t-lg" />) : (
             preview ? (
               <Image 
                 src={preview} 
-                alt={item.name} 
+                alt={initialWhiteboardData.name} 
                 width={100} 
                 height={150}
                 objectFit="cover"
@@ -93,7 +92,7 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
             ) : (
               <Image 
                 src={IMAGES.EMPTY_STATE} 
-                alt={item.name} 
+                alt={initialWhiteboardData.name} 
                 width={100} 
                 height={150}
                 objectFit="cover"
@@ -123,8 +122,10 @@ export const WhiteboardCard = ({ item, children }: ListItemProps) => {
   
   
 export const WhiteboardActions = ({
+  whiteboard,
   onClickDelete,
-  onClickUpdate
+  onClickUpdate,
+  onClickDetach
 }: WhiteboardActionsProps) => {
   
   return (
@@ -145,7 +146,16 @@ export const WhiteboardActions = ({
             <FilePenLine className="h-5 w-5" /> Edit information
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          
+          {
+            whiteboard.space && (
+              <DropdownMenuItem
+                onClick={onClickDetach}
+                className="cursor-pointer flex justify-start gap-2 text-red-600"
+              >
+                <Split className="h-5 w-5" /> Detach from space
+              </DropdownMenuItem>
+            )
+          }          
           <DropdownMenuItem
             onClick={onClickDelete}
             className="cursor-pointer flex justify-start gap-2 text-red-600"
