@@ -78,16 +78,14 @@ export const WhiteboardCard = ({ whiteboard: initialWhiteboardData, children }: 
     >
       <Link href={`/whiteboard/${initialWhiteboardData.id}`} className="w-full h-full basis-3/4 rounded-none rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
         {
-          loading ? (<Skeleton className="bg-gray-500 w-[24rem] h-[25rem] rounded-none rounded-t-lg" />) : (
+          loading ? (<Skeleton className="bg-gray-500 w-[25rem] h-[25rem] rounded-none rounded-t-lg" />) : (
             preview ? (
               <Image 
                 src={preview} 
                 alt={initialWhiteboardData.name} 
                 width={100} 
                 height={150}
-                objectFit="cover"
-                content="cover"
-                className="transition ease-in w-full h-full rounded-none rounded-t-lg hover:scale-110 object-cover" 
+                className="transition aspect-square ease-in w-full h-full rounded-none rounded-t-lg hover:scale-110 object-cover" 
               />
             ) : (
               <Image 
@@ -95,8 +93,7 @@ export const WhiteboardCard = ({ whiteboard: initialWhiteboardData, children }: 
                 alt={initialWhiteboardData.name} 
                 width={100} 
                 height={150}
-                objectFit="cover"
-                className="transition ease-in w-full h-auto rounded-none rounded-t-lg hover:scale-110 object-cover" 
+                className="transition aspect-square ease-in w-full h-auto rounded-none rounded-t-lg hover:scale-110 object-cover" 
               />
             )
           )

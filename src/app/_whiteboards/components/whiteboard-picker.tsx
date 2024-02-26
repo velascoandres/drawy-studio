@@ -8,8 +8,10 @@ import { Skeleton } from '@/app/_shared/components/ui/skeleton'
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
 import { cn } from '@/lib/utils'
 
-import { useWhiteboardList } from '../hooks/use-whiteboard-list'
+import { useFindUserWhiteboards } from '../hooks/use-find-user-whiteboards'
 import { type Whiteboard } from '../interfaces/whiteboard'
+
+import { WhiteboardCard } from './whiteboard-card'
 
 interface Props {
  attachedSpace?: boolean
@@ -20,18 +22,24 @@ interface Props {
 
 
 export const WhiteboardPicker = ({
-  selectedWhiteboard: initialWhiteboard,
   onWhiteboardSelect
 }:Props) => {
-  const [selectedWhiteboard, setSelectedWhiteboard] = useState(initialWhiteboard)
+  const [selectedWhiteboard, setSelectedWhiteboard] = useState<Whiteboard>()
   const [search, setSearch] = useState('')
   const debounce = useDebounceCallback()
 
-  const { whiteboards, isLoading } = useWhiteboardList({ query: { spaceId: null } })
+  const { whiteboards, isLoading,  } = useFindUserWhiteboards({
+    page: 1,
+    query: {
+      spaceId: null,
+      search
+    }
+  })
 
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    
     debounce(() => {
-      setSearch(evt.target.value) 
+      setSearch(evt.target.value)
       handleSelect(undefined)
     })
   }
@@ -44,11 +52,11 @@ export const WhiteboardPicker = ({
       
 
   return (
-    <div className="flex flex-col items-center gap-2 justify-start w-full">
-      <div className="relative w-full">
+    <section className="pt-2 flex flex-col items-center gap-2 justify-start w-full">
+      <header className="relative w-full">
         <Search className="absolute z-10 left-2 top-2" />
-        <Input value={search} className="w-full pl-10" placeholder="Search whiteboards" onChange={handleInputChange} /> 
-      </div>
+        <Input className="w-full pl-10" placeholder="Search whiteboards" onChange={handleInputChange} /> 
+      </header>
  
 
       <ShowContent
@@ -57,22 +65,36 @@ export const WhiteboardPicker = ({
         loading={isLoading}
         fallback={<Skeleton className="h-[300px] w-full" />}
       >
-        <h3 className="ml-2 mt-2 font-semibold text-sm self-start text-gray-400">Available whiteboards: </h3>
-        <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-gray-800 rounded-md">
-          {whiteboards.map((whiteboard) => 
-            <li
-              className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-neutral-700 border border-gray-800 rounded-md',{
-                'bg-neutral-800': selectedWhiteboard?.id === whiteboard.id
-              })} 
-              onClick={() => handleSelect(whiteboard)} 
-              key={whiteboard.id}
-            >
+        <div className="inline-flex gap-4 w-full">
+          <div className="basis-1/2 flex flex-col items-start gap-2">
+            <h3 className="ml-2 mt-2 font-semibold text-sm self-start text-gray-400">Available whiteboards: </h3>
+            <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-gray-800 rounded-md">
+              {whiteboards.map((whiteboard) => 
+                <li
+                  className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-neutral-700 border border-gray-800 rounded-md',{
+                    'bg-neutral-800': selectedWhiteboard?.id === whiteboard.id
+                  })} 
+                  onClick={() => handleSelect(whiteboard)} 
+                  key={whiteboard.id}
+                >
                
-              <span>{whiteboard.name}</span>
-            </li>
-          )}
-        </ul>
+                  <span>{whiteboard.name}</span>
+                </li>
+              )}
+            </ul>
+          </div>
+  
+          <div className="basis-1/2 aspect-square p-2 border border-dashed rounded-md">
+            {
+              selectedWhiteboard && (
+                <WhiteboardCard whiteboard={selectedWhiteboard} />
+              )
+            }
+          </div>   
+        </div>
+             
+              
       </ShowContent>
-    </div>
+    </section>
   )
 }

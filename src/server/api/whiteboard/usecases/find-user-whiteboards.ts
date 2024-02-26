@@ -1,4 +1,4 @@
-import { and,eq, ilike, or, type SQL, sql } from 'drizzle-orm'
+import { and,eq, ilike, isNull,or, type SQL, sql } from 'drizzle-orm'
 import { type PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 import { type z } from 'zod'
 
@@ -25,6 +25,10 @@ const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, option
 
   if (spaceId){
     extraConditions.push(eq(whiteboards.spaceId, spaceId))
+  }
+
+  if (spaceId === null){
+    extraConditions.push(isNull(whiteboards.spaceId))
   }
 
   baseFilter = and(baseFilter, ...extraConditions) as SQL<typeof schema>

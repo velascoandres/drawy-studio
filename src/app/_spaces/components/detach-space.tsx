@@ -19,7 +19,7 @@ export const DetachWhiteboardSpace = ({
 
   const { mutate: detach } = api.whiteboard.detachWhiteboardFromSpace.useMutation({
     onSuccess() {
-      void utils.whiteboard.findUserWhiteboardById.invalidate()
+      void utils.whiteboard.findUserWhiteboards.invalidate()
 
       toast({
         title: '🚨 Detached from space',

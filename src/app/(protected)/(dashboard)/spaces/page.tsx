@@ -10,6 +10,7 @@ import { SpaceCard, SpaceCardActions } from '@/app/_spaces/components/space-card
 import { SpaceCardsSkeleton } from '@/app/_spaces/components/space-cards-skeleton'
 import { useSpaceList } from '@/app/_spaces/hooks/use-space-list'
 import { NAVIGATION } from '@/constants/navigation'
+import { cn } from '@/lib/utils'
 
 
 const SpacePage = () => {
@@ -32,7 +33,9 @@ const SpacePage = () => {
       addLabel="Add new space"
       onAddClick={openCreateSpaceModal}
     >
-      <div className="flex-1 flex flex-col gap-8 items-center justify-center w-full h-full">
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full', {
+        'justify-center': !Boolean(spaces.length)
+      })}>
         <ShowContent
           empty={!Boolean(spaces.length)}
           loading={isLoading}

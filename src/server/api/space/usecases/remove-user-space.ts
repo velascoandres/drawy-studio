@@ -4,7 +4,7 @@ import { type z } from 'zod'
 
 import { type SearchByIdDto } from '@/dtos/shared-dtos'
 import type * as schema from '@/server/db/schema'
-import { spaces } from '@/server/db/schema'
+import { spaces, whiteboards } from '@/server/db/schema'
 import { NotAuthorized } from '@/server/exceptions/not-authorized'
 import { NotFound } from '@/server/exceptions/not-found'
 
@@ -32,6 +32,10 @@ const removeUserSpace= async (db: PostgresJsDatabase<typeof schema>, options: Op
   if (!isOwner){
     throw new NotAuthorized('User is not related to space')
   }
+
+  await db.update(whiteboards).set({
+    spaceId: null,
+  }).where(eq(whiteboards.spaceId, id))
 
   const { count }  = await db.delete(spaces).where(eq(spaces.id, id))
 

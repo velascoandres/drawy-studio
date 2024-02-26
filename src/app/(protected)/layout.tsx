@@ -9,6 +9,8 @@ const Layout = ({
 }: {
 	children: React.ReactNode;
 }) => {
+  console.log('render...')
+
   return (
     <div className="min-h-screen relative flex flex-col items-start justify-between overflow-y-auto bg-background">
       {children}

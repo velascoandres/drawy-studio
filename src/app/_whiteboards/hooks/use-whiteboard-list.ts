@@ -1,56 +1,35 @@
-import { useMemo } from 'react'
-
 import { useQueryParams } from '@/app/_shared/hooks/use-query-params'
 import { useModalStore } from '@/app/_shared/store/modal-store'
 import { AttachWhiteboardSpace } from '@/app/_spaces/components/attach-space'
 import { DetachWhiteboardSpace } from '@/app/_spaces/components/detach-space'
 import { type Space } from '@/app/_spaces/interfaces/space'
-import { transformSpace } from '@/app/_spaces/utils/transform-space'
-import { api } from '@/trpc/react'
 
 import { CreateUpdateWhiteboard } from '../components/create-update-whiteboard'
 import { DeleteWhiteboard } from '../components/delete-whiteboard'
 import { type Whiteboard } from '../interfaces/whiteboard'
 
-
-const DEFAULT_PER_PAGE = 10
+import { useFindUserWhiteboards } from './use-find-user-whiteboards'
 
 interface Options {
   query?: {
-    spaceId: number | null
-  }
+    spaceId?: number | null
+  },
 }
 
-const DEFAULT_OPTIONS = {
-  query: undefined
-}
-
-
-export const useWhiteboardList = ({ query }: Options = DEFAULT_OPTIONS) => {
+export const useWhiteboardList = ({ query }: Options = { query: { spaceId: undefined } }) => {  
   const { openModal } = useModalStore()
   const { searchParams, setParam, removeParam } = useQueryParams()
 
   const currentPage = Number(searchParams.get('page') ?? 1)
   const currentSearch = searchParams.get('search') ?? ''
 
-  const { data: response, isLoading, error } = api.whiteboard.findUserWhiteboards.useQuery({
-    search: currentSearch,
-    spaceId: query?.spaceId,
+  const { whiteboards, isLoading, error, totalPages } = useFindUserWhiteboards({
     page: currentPage,
-    perPage: DEFAULT_PER_PAGE
-  })
-
-  const whiteboards = useMemo(() => {
-    if (!response?.data?.length){
-      return []
+    query: {
+      spaceId: query?.spaceId,
+      search: currentSearch
     }
-
-    return response.data.map((whiteboard) => ({
-      ...whiteboard,
-      description: whiteboard.description ?? '',
-      space: whiteboard.space ? transformSpace(whiteboard?.space) : undefined,
-    }))
-  }, [response?.data])
+  })
 
   const onSearchHandler = (search: string) => {
     if (search) {
@@ -112,7 +91,7 @@ export const useWhiteboardList = ({ query }: Options = DEFAULT_OPTIONS) => {
     error,
     isLoading,
     whiteboards,
-    totalPages: response?.totalPages ?? 0,
+    totalPages,
     currentSearch,
     currentPage,
     // event handlers

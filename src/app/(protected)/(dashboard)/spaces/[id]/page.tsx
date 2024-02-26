@@ -12,6 +12,7 @@ import { WhiteboardActions,WhiteboardCard } from '@/app/_whiteboards/components/
 import { WhiteboardsSkeleton } from '@/app/_whiteboards/components/whiteboards-skeleton'
 import { useWhiteboardList } from '@/app/_whiteboards/hooks/use-whiteboard-list'
 import { IMAGES } from '@/constants/images'
+import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
 const SpacePage = ({ params }: {params: {id: string}}) => {
@@ -52,7 +53,9 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
     >
-      <div className="flex-1 flex flex-col gap-8 items-center justify-center w-full h-full">
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full', {
+        'justify-center': !Boolean(whiteboards.length)
+      })}>
         <ShowContent
           empty={!Boolean(whiteboards.length)}
           loading={isLoading}
