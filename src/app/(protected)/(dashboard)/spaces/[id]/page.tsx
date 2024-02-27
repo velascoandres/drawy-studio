@@ -4,7 +4,6 @@ import React from 'react'
 
 import { ManagementPageLayout } from '@/app/_shared/components/layout/management-layout'
 import { EmptyState } from '@/app/_shared/components/ui/empty-state'
-import { LoadingPage } from '@/app/_shared/components/ui/loading-page'
 import { Pagination } from '@/app/_shared/components/ui/pagination'
 import { ShowContent } from '@/app/_shared/components/ui/show-content'
 import { transformSpace } from '@/app/_spaces/utils/transform-space'
@@ -41,7 +40,7 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
   })
 
   if (!currentSpace){
-    return <LoadingPage />
+    return null
   }
 
   return (

@@ -34,7 +34,7 @@ const SpacePage = () => {
       onAddClick={openCreateSpaceModal}
     >
       <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full', {
-        'justify-center': !Boolean(spaces.length)
+        'justify-center': !Boolean(spaces.length) && !isLoading
       })}>
         <ShowContent
           empty={!Boolean(spaces.length)}

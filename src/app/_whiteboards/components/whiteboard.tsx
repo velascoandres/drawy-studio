@@ -17,6 +17,7 @@ export interface Content {
     elements: readonly ExcalidrawElement[]
     appState?: AppState
     files?: BinaryFileData[]
+    rawFiles?: BinaryFiles
   }
 }
 

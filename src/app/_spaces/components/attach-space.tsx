@@ -10,7 +10,7 @@ import { Skeleton } from '@/app/_shared/components/ui/skeleton'
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
 import { useToast } from '@/app/_shared/hooks/use-toast'
 import { useModalStore } from '@/app/_shared/store/modal-store'
-import { WhiteboardCard } from '@/app/_whiteboards/components/whiteboard-card'
+import { WhiteboardPreview } from '@/app/_whiteboards/components/whiteboard-preview'
 import { useFindUserWhiteboards } from '@/app/_whiteboards/hooks/use-find-user-whiteboards'
 import { type Whiteboard } from '@/app/_whiteboards/interfaces/whiteboard'
 import { cn } from '@/lib/utils'
@@ -106,11 +106,11 @@ export const AttachWhiteboardSpace = ({
         <div className="inline-flex gap-4 w-full">
           <div className="basis-1/2 flex flex-col items-start gap-2">
             <h3 className="ml-2 mt-2 font-semibold text-sm self-start text-gray-400">Available whiteboards: </h3>
-            <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-gray-800 rounded-md">
+            <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-gray-800 rounded-md bg-gradient-to-br from-gray-900 to-indigo-950">
               {whiteboards.map((whiteboard) => 
                 <li
-                  className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-neutral-700 border border-gray-800 rounded-md',{
-                    'bg-neutral-800': whiteboardToAttach?.id === whiteboard.id
+                  className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:text-indigo-400 border border-transparent hover:border-gray-700 rounded-md',{
+                    'bg-background text-indigo-400 border-gray-700': whiteboardToAttach?.id === whiteboard.id
                   })} 
                   onClick={() => handleSelect(whiteboard)} 
                   key={whiteboard.id}
@@ -125,7 +125,7 @@ export const AttachWhiteboardSpace = ({
           <div className="basis-1/2 aspect-square p-2 border border-dashed rounded-md">
             {
               whiteboardToAttach && (
-                <WhiteboardCard whiteboard={whiteboardToAttach} />
+                <WhiteboardPreview className="rounded-md" name={whiteboardToAttach.name} content={whiteboardToAttach.content} />
               )
             }
           </div>   

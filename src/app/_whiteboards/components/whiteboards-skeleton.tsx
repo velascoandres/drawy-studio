@@ -8,7 +8,6 @@ export const WhiteboardsSkeleton = () => {
       <Skeleton className="bg-gray-600 h-[30rem] w-full md:max-w-sm rounded-md" />
       <Skeleton className="bg-gray-600 h-[30rem] w-full md:max-w-sm rounded-md" />
       <Skeleton className="bg-gray-600 h-[30rem] w-full md:max-w-sm rounded-md" />
-      <Skeleton className="bg-gray-600 h-[30rem] w-full md:max-w-sm rounded-md" />
     </div>
   )
 }

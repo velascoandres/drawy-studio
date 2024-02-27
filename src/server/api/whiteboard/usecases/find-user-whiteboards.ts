@@ -33,18 +33,21 @@ const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, option
 
   baseFilter = and(baseFilter, ...extraConditions) as SQL<typeof schema>
 
-  const [countResponse] = await db.select({
+  const countResponseQuery = db.select({
     count: sql<number>`cast(count(${whiteboards.id}) as int)`,
   }).from(whiteboards).where(baseFilter)
 
-  const data = await db.query.whiteboards.findMany({
+  const queryResponse = db.query.whiteboards.findMany({
     where: baseFilter,
     limit: perPage,
     offset: perPage * (page - 1),
+    orderBy: (whiteboards, { asc }) => [asc(whiteboards.createdAt)],
     with: {
       space: true
     }
   })
+
+  const [[countResponse], data] = await Promise.all([countResponseQuery, queryResponse])
 
   const count = countResponse?.count ?? 0
 
