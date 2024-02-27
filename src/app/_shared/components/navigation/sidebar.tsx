@@ -32,7 +32,7 @@ export const SideNavigation = () => {
               <li 
                 key={`menu-${name}`}
                 className={cn('group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent md:text-gray-400 md:hover:border-gray-700 md:px-4 md:py-2 md:rounded-xl', {
-                  'border-gray-800 md:text-indigo-500 bg-background': pathname === path || pathname.includes(path)
+                  'border-gray-800 text-indigo-500 md:bg-background': pathname === path || pathname.includes(path)
                 })}
               >
                 <Link href={path} className=" group-hover:text-indigo-400 inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">

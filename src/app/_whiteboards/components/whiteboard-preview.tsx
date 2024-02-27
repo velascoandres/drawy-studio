@@ -47,7 +47,7 @@ export const WhiteboardPreview = ({ name, content, className }: Props) => {
   return (
     <>
       {
-        loading ? (<Skeleton className={`bg-gray-500 w-[25rem] h-[25rem] ${className}`} />) : (
+        loading ? (<Skeleton className={`bg-gray-500 h-[19rem] w-full md:max-w-sm ${className}`} />) : (
           preview ? (
             <Image 
               src={preview} 

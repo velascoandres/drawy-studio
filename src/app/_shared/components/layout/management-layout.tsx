@@ -40,7 +40,7 @@ export const ManagementPageLayout = ({
           {extraActions}
         </div>
       </header>
-      <section className="flex-1 flex flex-col px-4 pt-20 w-full h-full">
+      <section className="flex-1 flex flex-col px-4 pt-32 md:pt-20 w-full h-full">
         {children}
       </section>  
       <Button variant="secondary" onClick={onAddClick} className="bg-neutral-900 md:hidden fixed bottom-24 right-4 border border-white z-10 p-2 py-8 flex flex-row justify-center items-center rounded-full">

@@ -30,27 +30,29 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
     
   return (
     <article 
-      className="h-[30rem] w-full md:max-w-sm  relative gap-4 flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-lg"         
+      className=" w-full md:max-w-sm  gap-4 border-2 border-transparent hover:border-indigo-800 flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
     >
-      <Link href={`/whiteboard/${whiteboard.id}`} className="w-full h-full basis-3/4 rounded-none rounded-t-lg cursor-pointer flex overflow-hidden flex-col items-center">
-        <div className="transition ease-in w-full hover:scale-110">
-          <WhiteboardPreview className="rounded rounded-t-lg" name={name} content={content} />
-        </div>
-      </Link>
-      <div className="basis-1/4 px-2 flex flex-col justify-between gap-2 mb-2 break-words text-ellipsis">
-        <div className="flex flex-col gap-2">
-          <h4 className="text-lg font-semibold select-none flex items-center line-clamp-1 text-ellipsis">
-            {name}
-          </h4>
+      <div className="group relative w-full h-full flex overflow-hidden flex-col items-center">
+        <Link href={`/whiteboard/${whiteboard.id}`} className="cursor-pointer transition ease-in w-full hover:scale-110">
+          <WhiteboardPreview className="rounded-md" name={name} content={content} />
+        </Link>
+        <div 
+          className="transition ease-in bg-gradient-to-br from-gray-900 to-indigo-950 absolute bottom-0 w-full px-2 flex flex-col justify-between gap-2 break-words text-ellipsis"
+          
+        >
+          <div className="flex flex-col gap-2">
+            <h4 className="text-indigo-500 text-lg font-semibold select-none flex items-center line-clamp-1 text-ellipsis">
+              {name}
+            </h4>
 
-          <p className="font-medium line-clamp-1 text-ellipsis">
-            {description}
-          </p>
-        </div>
+            <p className="font-medium text-sm line-clamp-1 text-ellipsis text-pretty">
+              {description}
+            </p>
+          </div>
 
-        {children}
+          {children}
+        </div>
       </div>
-  
     </article>     
   )
 }
@@ -67,9 +69,9 @@ export const WhiteboardActions = ({
     <div className="mb-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="default" className="bg-indigo-600 text-white hover:bg-indigo-500">
+          <Button variant="outline">
             <div className="flex items-center gap-2">
-              <Menu /> Options 
+              <Menu /> 
             </div>
           </Button>
         </DropdownMenuTrigger>
