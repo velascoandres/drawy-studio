@@ -27,7 +27,7 @@ export const useCreateWhiteboard = () => {
   
       void utils.whiteboard.findUserWhiteboards.invalidate()
 
-      void router.push(`/whiteboards/${created.id}`)
+      void router.push(`/whiteboard/${created.id}`)
 
       
       closeModal()

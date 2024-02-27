@@ -125,7 +125,7 @@ export const AttachWhiteboardSpace = ({
           <div className="basis-1/2 aspect-square p-2 border border-dashed rounded-md">
             {
               whiteboardToAttach && (
-                <WhiteboardPreview className="rounded-md" name={whiteboardToAttach.name} content={whiteboardToAttach.content} />
+                <WhiteboardPreview key={whiteboardToAttach.id} className="rounded-md" name={whiteboardToAttach.name} content={whiteboardToAttach.content} />
               )
             }
           </div>   

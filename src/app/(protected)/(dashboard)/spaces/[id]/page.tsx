@@ -1,8 +1,10 @@
 'use client'
 
 import React from 'react'
+import { Merge } from 'lucide-react'
 
 import { ManagementPageLayout } from '@/app/_shared/components/layout/management-layout'
+import { Button } from '@/app/_shared/components/ui/button'
 import { EmptyState } from '@/app/_shared/components/ui/empty-state'
 import { Pagination } from '@/app/_shared/components/ui/pagination'
 import { ShowContent } from '@/app/_shared/components/ui/show-content'
@@ -31,6 +33,7 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
     onSearchHandler,
     openUpdateWhiteboard,
     openRemoveWhiteboard,
+    openCreateWhiteboard,
     openAttachSpace,
     openDetachSpace,
   } = useWhiteboardList({
@@ -46,11 +49,16 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
   return (
     <ManagementPageLayout
       title={currentSpace.name}
-      addLabel="Attach Whiteboard"
-      onAddClick={() => openAttachSpace(transformSpace(currentSpace))}
+      addLabel="New Whiteboard"
+      onAddClick={() => openCreateWhiteboard(currentSpace.id)}
       onSearch={onSearchHandler}
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
+      extraActions={[
+        <Button key="attach-action" variant="outline" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center rounded-md">
+          <Merge className="w-auto md:h-auto" /> <span> Attach Whiteboard </span>
+        </Button>
+      ]}
     >
       <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full', {
         'justify-center': !Boolean(whiteboards.length)

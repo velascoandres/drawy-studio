@@ -33,11 +33,13 @@ import { useUpdateWhiteboard } from '../hooks/use-update-whiteboard'
 
 interface Props {
   whiteboard?: z.infer<typeof CreateWhiteboardDto> & { id: number }
+  targetSpaceId?: number
 }
 
 
 export const CreateUpdateWhiteboard = ({
-  whiteboard
+  whiteboard,
+  targetSpaceId
 }: Props) => {
   const { create, isLoading: isCreating } = useCreateWhiteboard()
   const { update, isLoading: isUpdating } = useUpdateWhiteboard()
@@ -47,6 +49,7 @@ export const CreateUpdateWhiteboard = ({
     defaultValues: {
       name: whiteboard?.name ?? '',
       description: whiteboard?.description ?? '',
+      spaceId: targetSpaceId ?? null,
     },
   })
 
@@ -55,6 +58,7 @@ export const CreateUpdateWhiteboard = ({
       update({
         ...formValue,
         id: whiteboard.id,
+        spaceId: whiteboard.spaceId,
       })
     } else {
       create({

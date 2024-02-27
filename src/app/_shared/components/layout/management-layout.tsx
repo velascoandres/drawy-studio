@@ -5,13 +5,13 @@ import { Plus } from 'lucide-react'
 
 import { Button } from '../ui/button'
 import { SearchBox } from '../ui/search-box'
-
 interface Props {
     title: string
     searchPlaceholder?: string
     children: React.ReactNode
-    addLabel: string
     searchValue?: string
+    extraActions?: [React.ReactNode]
+    addLabel: string
     onAddClick: () => void
     onSearch: (search: string) => void
 }
@@ -22,6 +22,7 @@ export const ManagementPageLayout = ({
   children,
   addLabel,
   onAddClick,
+  extraActions,
   searchValue,
   onSearch,
 }: Props) => {
@@ -36,6 +37,7 @@ export const ManagementPageLayout = ({
           <Button variant="secondary" onClick={onAddClick} className="hidden bg-neutral-800 border-none z-0 p-2 px-4 w-auto md:flex flex-row gap-2 justify-center items-center rounded-md">
             <Plus className="w-auto md:h-auto" /> <span className="hidden md:block">{addLabel}</span>
           </Button>
+          {extraActions}
         </div>
       </header>
       <section className="flex-1 flex flex-col px-4 pt-20 w-full h-full">

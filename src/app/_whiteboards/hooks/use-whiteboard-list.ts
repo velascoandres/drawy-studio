@@ -44,9 +44,12 @@ export const useWhiteboardList = ({ query }: Options = { query: { spaceId: undef
     setParam('page', newPage.toString())
   }
 
-  const openCreateWhiteboard = () => {
+  const openCreateWhiteboard = (spaceId?: number) => {
     openModal({
-      component: CreateUpdateWhiteboard
+      component: CreateUpdateWhiteboard,
+      props: {
+        targetSpaceId: spaceId
+      }
     })
   }
 
