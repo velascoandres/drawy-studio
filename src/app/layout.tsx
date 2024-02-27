@@ -1,4 +1,4 @@
-import { Onest } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
 import { TRPCReactProvider } from '@/trpc/react'
 
@@ -9,7 +9,7 @@ import { Toaster } from './_shared/components/ui/toaster'
 
 import '@/styles/globals.css'
 
-const onest = Onest({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 })
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${onest.variable}`}>
+      <body className={`font-sans ${inter.variable}`}>
         <div className="absolute inset-0 -z-10 h-min-screen w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
         <AuthProvider>
           <ThemeProvider
