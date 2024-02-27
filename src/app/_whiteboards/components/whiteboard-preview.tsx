@@ -47,7 +47,7 @@ export const WhiteboardPreview = ({ name, content, className }: Props) => {
   return (
     <>
       {
-        loading ? (<Skeleton className={`bg-gray-500 h-[19rem] w-full md:max-w-sm ${className}`} />) : (
+        loading ? (<Skeleton className={`bg-gray-500 h-[16rem] w-full md:max-w-sm ${className}`} />) : (
           preview ? (
             <Image 
               src={preview} 
@@ -64,7 +64,7 @@ export const WhiteboardPreview = ({ name, content, className }: Props) => {
               width={100} 
               height={150}
               draggable={false}
-              className={imageClassname} 
+              className={'transition aspect-square ease-in w-full h-full pb-20'} 
             />
           )
         )

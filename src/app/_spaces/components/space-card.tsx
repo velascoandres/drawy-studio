@@ -35,14 +35,14 @@ export const SpaceCard = ({
 
   return (
     <article  
-      className="overflow-hidden transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
+      className="overflow-hidden w-96 transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
       style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
     >
       {
         renderTitle ? renderTitle(space) : <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
       }
 
-      <p className="text-md whitespace-normal truncate overflow-ellipsis mb-4">
+      <p className="text-md whitespace-normal truncate overflow-ellipsis mb-2 w-full">
         {space.description}
       </p>
 

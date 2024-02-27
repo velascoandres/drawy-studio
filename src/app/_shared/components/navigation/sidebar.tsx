@@ -31,7 +31,7 @@ export const SideNavigation = () => {
             menuItems.map(({ name, icon: IconComponent, path }) => (
               <li 
                 key={`menu-${name}`}
-                className={cn('group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent md:text-gray-400 md:hover:border-gray-700 md:px-4 md:py-2 md:rounded-xl', {
+                className={cn('group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent text-gray-400 md:hover:border-gray-700 md:px-4 md:py-2 md:rounded-xl', {
                   'border-gray-800 text-indigo-500 md:bg-background': pathname === path || pathname.includes(path)
                 })}
               >

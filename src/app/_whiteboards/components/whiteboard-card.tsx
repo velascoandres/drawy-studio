@@ -5,6 +5,7 @@ import { FilePenLine, Menu, Split, Trash2 } from 'lucide-react'
 
 import { Button } from '@/app/_shared/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/app/_shared/components/ui/dropdown-menu'
+import { SpaceBadge } from '@/app/_spaces/components/space-badge'
 
 import { type  Whiteboard } from '../interfaces/whiteboard'
 
@@ -30,7 +31,7 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
     
   return (
     <article 
-      className=" w-full md:max-w-sm  gap-4 border-2 border-transparent hover:border-indigo-800 flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
+      className=" w-full md:max-w-sm  gap-4 border-2  hover:border-indigo-900 flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
     >
       <div className="group relative w-full h-full flex overflow-hidden flex-col items-center">
         <Link href={`/whiteboard/${whiteboard.id}`} className="cursor-pointer transition ease-in w-full hover:scale-110">
@@ -50,7 +51,10 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
             </p>
           </div>
 
-          {children}
+          <div className="inline-flex justify-between gap-2 items-center">
+            {children} { whiteboard.space && <SpaceBadge space={whiteboard.space} />}
+          </div>
+          
         </div>
       </div>
     </article>     
