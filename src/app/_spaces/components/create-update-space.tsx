@@ -181,7 +181,7 @@ export const CreateUpdateSpace = ({
 
           <h3 className="font-bold">Space preview</h3>
 
-          <div className="flex-1 w-full">
+          <div className="flex-1 md:mx-32">
             <SpaceCard 
               space={{
                 id: 0,

@@ -81,6 +81,10 @@
     scroll-behavior: auto;
   }
 
+  .grid-view {
+    @apply grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 w-full;
+  }
+
   header {
     animation: nav-header-shadown 1s linear both;
     animation-timeline: scroll();
