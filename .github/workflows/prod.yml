@@ -1,0 +1,50 @@
+name: Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Vercel CLI
+        run: npm install --global vercel@canary
+
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          
+          envkey_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          envkey_NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+
+          envkey_GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+          envkey_GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+
+          file_name: .env
+          fail_on_empty: false  
+
+      - name: Set up Node.js and Bun
+        uses: actions/setup-node@v1.3
+      - uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install  
+
+      - name: Check lint
+        run: bun lint
+
+      - name: Setup DB
+        run: bun db:push 
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}  
