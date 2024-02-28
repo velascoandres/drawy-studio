@@ -18,6 +18,19 @@ export const metadata = {
   title: 'Drawy studio',
   description: 'Drawy is a whiteboard cloud manager solution',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
+  openGraph: {
+    title: 'Drawy a cloud based manager whiteboard solution',
+    description: 'Drawy is an innovative cloud-based whiteboard management solution that stands out for its integration with the popular Excalidraw tool',
+    url: 'https://drawy-studio.vercel.app/',
+    siteName: 'Drawy studio',
+    images: [
+      {
+        url: 'https://drawy-studio.vercel.app/whiteboard.jpg',
+        width: 1200,
+        height: 630,
+      }
+    ],
+  },
 }
 
 export default function RootLayout({

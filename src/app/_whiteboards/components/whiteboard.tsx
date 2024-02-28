@@ -42,7 +42,6 @@ const WelcomeScreen = dynamic(
 )
 
 export const Whiteboard = ({
-  id,
   initialContent,
   onChange,
 }: Props) => {

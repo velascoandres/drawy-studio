@@ -1,28 +1,50 @@
-# Create T3 App
+# Drawy studio
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to Drawy Studio, your go-to application for [Excalidraw](https://excalidraw.com/) whiteboards management featuring a convenient dashboard! This application is built using the [T3 stack](https://create.t3.gg/) with prisma.
 
-## What's next? How do I make an app with this?
+## How to Use
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Clone this repository.
+Set up your virtual environment (optional but recommended).
+Copy the contents of `.env.example` into a new file named `.env` and configure the required variables.
+```text
+DATABASE_PORT=""
+DATABASE_URL=""
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+NEXTAUTH_SECRET=""
+NEXTAUTH_URL=""
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+# Next Auth Github Provider
+GH_CLIENT_ID=""
+GH_CLIENT_SECRET=""
+```
 
-## Learn More
+Install dependencies.
+```shell_script
+bun install
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+If you need to build the databases locally, you can use the `docker-compose.yaml` file.
+```shell_script
+docker compose -D
+```
+> An instance of postgresql will be created
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Setup the database.
+```shell_script
+bun db:push
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Run the application in dev mode
+```shell_script
+bun dev
+```
+Open your browser and visit [http://localhost:3000](http://localhost:3000) to begin.
 
-## How do I deploy this?
+## Key Features
+- **Cloud based:** Save your whiteboards remotely to the cloud.
+- **Intuitive Dashboard:** Save, organize, and manage your whiteboards efficiently..
+- **Workspaces:** Group your whiteboards into workspaces.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+We hope you enjoy using Drawy studio! If you have any questions or issues, feel free to open an [issue](https://github.com/velascoandres/drawy-studio/issues)
