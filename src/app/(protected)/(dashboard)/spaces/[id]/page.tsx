@@ -55,7 +55,7 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
       extraActions={[
-        <Button key="attach-action" variant="outline" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center rounded-md">
+        <Button key="attach-action" variant="ghost" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center">
           <Merge className="w-auto md:h-auto" /> <span> Attach Whiteboard </span>
         </Button>
       ]}

@@ -3,8 +3,8 @@ import { Cloud, Group,LayoutDashboard } from 'lucide-react'
   
 export const FEATURES = [
   {
-    title: 'Save whiteboards',
-    description: 'Save your whiteboards on the cloud',
+    title: 'Cloud based',
+    description: 'Save your whiteboards remotely on the cloud',
     icon: <Cloud className="w-8 h-8" />
   },
   {

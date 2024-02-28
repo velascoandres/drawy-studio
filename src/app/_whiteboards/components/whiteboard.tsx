@@ -34,7 +34,15 @@ const Excalidraw = dynamic(
   },
 )
 
+const WelcomeScreen = dynamic(
+  async () => (await import('@excalidraw/excalidraw')).WelcomeScreen,
+  {
+    ssr: false,
+  },
+)
+
 export const Whiteboard = ({
+  id,
   initialContent,
   onChange,
 }: Props) => {
@@ -80,7 +88,9 @@ export const Whiteboard = ({
       initialData={{
         ...(initialContent?.scene ?? {}) as ExcalidrawInitialDataState 
       }}
-    />
+    >
+      <WelcomeScreen />
+    </Excalidraw>
   )
 }
   

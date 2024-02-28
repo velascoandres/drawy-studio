@@ -17,14 +17,17 @@ const WhiteboardPage = () => {
     <main className="h-screen w-screen">
       {
         whiteboard && (
-          <Whiteboard
-            id={whiteboard?.id ?? 0} 
-            initialContent={whiteboard?.content as Content} 
-            onChange={onChangeHandler} 
-          />
+          <>
+            <Whiteboard
+              id={whiteboard?.id ?? 0} 
+              initialContent={whiteboard?.content as Content} 
+              onChange={onChangeHandler} 
+            />
+
+            <WhiteboardNavigation whiteboardName={whiteboard.name} />
+          </>
         )
       }
-      <WhiteboardNavigation />
     </main>
   )
 }

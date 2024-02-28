@@ -30,7 +30,7 @@ const WhiteboardsPage = () => {
 
   return (
     <ManagementPageLayout
-      title="Your whiteboards"
+      title="All whiteboards"
       addLabel="Whiteboard"
       onAddClick={openCreateWhiteboard}
       onSearch={onSearchHandler}

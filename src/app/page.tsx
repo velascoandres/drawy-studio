@@ -6,7 +6,6 @@ import { FEATURES } from '@/constants/features'
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_auth/components/sign-in-providers'
-import { ContactLinks } from './_shared/components/navigation/contact-links'
 import { AnimatedBagde } from './_shared/components/ui/animated-bagde'
 import { Card, CardDescription, CardHeader, CardTitle } from './_shared/components/ui/card'
 
@@ -16,11 +15,11 @@ export default async function Home() {
   const session = await getServerAuthSession()
   
   return (
-    <main className="flex flex-col items-center justify-center  text-white min-h-screen overflow-y-auto">
+    <main className="flex flex-col items-center justify-center text-white min-h-screen gap-4">
       
-      <section className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+      <section className="flex flex-col items-center justify-center gap-12 px-4 py-16">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Welcome to <span className="text-[#63e]">Drawy</span> Studio
+          Welcome to <strong className="italic text-[#63e] font-bold">Drawy</strong> Studio
         </h1>
 
         <p className="max-w-[300px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[850px] text-gray-200 text-lg/relaxed md:text-xl/relaxed dark:text-gray-400 [&>strong]:font-bold [&>strong]:text-[#63e]">
@@ -45,7 +44,7 @@ export default async function Home() {
       </section>
 
 
-      <section className="flex flex-row flex-wrap gap-4 items-center justify-center mb-16">
+      <section className="flex flex-row flex-wrap items-center justify-center gap-3">
         {
           FEATURES.map(({ icon, title, description }, index) => (
 
@@ -54,7 +53,7 @@ export default async function Home() {
                 <div className="group-hover:text-[#63e]">
                   {icon}
                 </div>
-                <CardTitle className="transition ease-out duration-200 group-hover:text-[#63e] text-xl font-bold self-center text-gray-400">
+                <CardTitle className="transition ease-out duration-200 group-hover:text-primary/45 text-xl font-bold self-center text-gray-400">
                   {title}
                 </CardTitle>
                 <CardDescription className="transition ease-out duration-200 group-hover:text-gray-200 text-base/relaxed text-gray-400">
@@ -65,9 +64,6 @@ export default async function Home() {
           ))
         }
       </section>
-
-      <ContactLinks />
-
     </main>
   )
 }
