@@ -19,6 +19,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          envkey_DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
           
           envkey_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           envkey_NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
