@@ -30,7 +30,7 @@ jobs:
           fail_on_empty: false  
 
       - name: Set up Node.js and Bun
-        uses: actions/setup-node@v1.3
+        uses: actions/setup-node@v3
       - uses: oven-sh/setup-bun@v1
 
       - name: Install dependencies
