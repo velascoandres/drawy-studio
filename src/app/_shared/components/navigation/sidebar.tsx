@@ -1,11 +1,14 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Github } from 'lucide-react'
 
 import { ProfileCard } from '@/app/_auth/components/profile-card'
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
+import { LINKS } from '@/constants/links'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
@@ -47,6 +50,25 @@ export const SideNavigation = () => {
           </li>
         </ul>
       </nav>
+
+      <ul className="hidden md:block absolute bottom-1 list-none left-[10%] right-[10%]">
+        <li className="group transition ease-in relative list-none flex items-center w-full border border-transparent text-gray-400 hover:underline px-4 py-2 rounded-xl">
+          <Link href={LINKS.GITHIB_REPOSITORY} className=" group-hover:text-indigo-400 inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">
+            <Github />
+            <span>
+              Source code
+            </span>
+          </Link>
+        </li>
+
+        <li className="group transition ease-in relative list-none flex items-center w-full border border-transparent text-gray-400 hover:underline px-4 py-2">
+          <Link href={LINKS.BUY_ME_COFEE} className="text-amber-400 inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">
+            <span>
+              Buy me a coffee
+            </span>
+          </Link>
+        </li>
+      </ul>
     </aside>
   )
 }
