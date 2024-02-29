@@ -34,7 +34,7 @@ export const DetachWhiteboardSpace = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-xl">Detach: <strong className="text-indigo-400" >{whiteboard.name}</strong></DialogTitle>
+        <DialogTitle className="text-xl">Detach: <strong className="text-primary" >{whiteboard.name}</strong></DialogTitle>
       </DialogHeader>
 
       <p className="px-2 font-semibold text-lg">

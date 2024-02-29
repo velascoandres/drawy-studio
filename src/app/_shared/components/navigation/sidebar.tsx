@@ -50,16 +50,20 @@ export const SideNavigation = () => {
         </ul>
       </nav>
 
-      <ul className="invisible md:visible absolute bottom-1 inline-flex list-none left-[10%] right-[10%] text-sm">
-        <li className="group transition ease-in relative list-none flex items-center w-full border border-transparent  hover:underline px-4 py-2 rounded-xl">
-          <Link href={LINKS.GITHIB_REPOSITORY} className=" group-hover:text-primary inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">
+      <ul className="invisible md:visible absolute bottom-1 inline-flex  list-none left-[25%] right-[25%] text-sm">
+        <li className="relative flex items-center w-full">
+          <Link href={LINKS.GITHIB_REPOSITORY} 
+            className="transition ease-in rounded-full hover:bg-secondary p-3"
+          >
             <Github />
           </Link>
         </li>
 
-        <li className="group transition ease-in relative list-none flex items-center w-full border border-transparent hover:underline px-4 py-2">
-          <Link href={LINKS.BUY_ME_COFEE} className="text-amber-400 inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">
-            <Coffee />
+        <li className="relative flex items-center w-full">
+          <Link href={LINKS.BUY_ME_COFEE} 
+            className="transition ease-in rounded-full hover:bg-secondary p-3"
+          >
+            <Coffee className="text-amber-400" />
           </Link>
         </li>
       </ul>

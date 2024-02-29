@@ -56,11 +56,11 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
       searchValue={currentSearch}
       extraActions={[
         <Button key="attach-action" variant="ghost" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center">
-          <Merge className="w-auto md:h-auto" /> <span> Attach Whiteboard </span>
+          <Merge className="w-auto md:h-auto" /> <span className="hidden md:block"> Attach Whiteboard </span>
         </Button>
       ]}
     >
-      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between', {
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {
         'justify-center': !Boolean(whiteboards.length)
       })}>
         <ShowContent

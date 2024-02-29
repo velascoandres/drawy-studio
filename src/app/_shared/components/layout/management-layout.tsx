@@ -29,9 +29,9 @@ export const ManagementPageLayout = ({
   return (
     <main className="overflow-y-auto py-2 flex flex-col gap-4 items-start min-h-screen w-full">  
       <header className="px-4 py-2 z-10 fixed top-0 w-full flex flex-row flex-wrap items-center border border-transparent border-b-border gap-2">
-        <h1 className="hidden xl:block text-3xl font-bold">{title}</h1>
-        <div className="md:basis-2/3 flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
-          <div className="basis-1/2">
+        <h1 className="text-3xl font-bold">{title}</h1>
+        <div className="md:basis-2/3 w-full flex flex-row justify-start md:justify-center items-center gap-2">
+          <div className="md:basis-1/2 w-full">
             <SearchBox placeholder={searchPlaceholder} onSearch={onSearch} value={searchValue} />
           </div>  
           <Button variant="outline" onClick={onAddClick} className="hidden  z-0 py-1 px-4 w-auto md:flex flex-row gap-2 justify-center items-center">

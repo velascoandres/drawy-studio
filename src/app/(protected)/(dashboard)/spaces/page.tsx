@@ -33,7 +33,7 @@ const SpacePage = () => {
       addLabel="Add new space"
       onAddClick={openCreateSpaceModal}
     >
-      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between', {
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {
         'justify-center': !Boolean(spaces.length) && !isLoading
       })}>
         <ShowContent
@@ -47,7 +47,7 @@ const SpacePage = () => {
             />
           }
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 w-full gap-2">
             {spaces.map((space) => (
               <SpaceCard 
                 key={`${space.id}-item`} 

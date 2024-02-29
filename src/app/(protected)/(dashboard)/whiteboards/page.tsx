@@ -37,7 +37,7 @@ const WhiteboardsPage = () => {
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
     >
-      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between', {
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {
         'justify-center': !Boolean(whiteboards.length) && !isLoading
       })}>
         <ShowContent

@@ -15,6 +15,7 @@ const inter = Inter({
 })
 
 export const metadata = {
+  metadataBase: new URL('https://drawy-studio.vercel.app'),
   title: 'Drawy studio',
   description: 'Drawy is a whiteboard cloud manager solution',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],

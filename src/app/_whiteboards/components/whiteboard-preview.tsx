@@ -34,7 +34,10 @@ export const WhiteboardPreview = ({ name, content, className }: Props) => {
     void import('@excalidraw/excalidraw')
     .then((excalidraw) => excalidraw.exportToBlob({
       elements: contentCasted.scene?.elements ?? [] as NonDeleted<ExcalidrawElement>[],
-      appState: contentCasted.scene?.appState ?? {},
+      appState: {
+        ...(contentCasted.scene?.appState ?? {}),
+        exportWithDarkMode: contentCasted.scene.appState?.theme === 'dark' 
+      },
       files: contentCasted.scene?.rawFiles ?? {},
     }))
     .then(blobToBase64)

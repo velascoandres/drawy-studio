@@ -35,7 +35,7 @@ export const RemoveSpace = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-xl">Delete: <strong className="text-indigo-400" >{space.name}</strong></DialogTitle>
+        <DialogTitle className="text-xl">Delete: <strong className="text-primary-400" >{space.name}</strong></DialogTitle>
       </DialogHeader>
 
       <p className="px-2 font-semibold text-lg">

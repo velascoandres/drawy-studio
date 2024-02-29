@@ -35,7 +35,7 @@ export const SpaceCard = ({
 
   return (
     <article  
-      className="overflow-hidden w-96 transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
+      className="overflow-hidden w-full md:max-w-sm transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
       style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
     >
       {
