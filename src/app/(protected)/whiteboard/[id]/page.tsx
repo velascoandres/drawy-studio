@@ -24,7 +24,7 @@ const WhiteboardPage = () => {
               onChange={onChangeHandler} 
             />
 
-            <WhiteboardNavigation whiteboardName={whiteboard.name} />
+            <WhiteboardNavigation whiteboardName={whiteboard.name} spaceId={whiteboard.spaceId} />
           </>
         )
       }

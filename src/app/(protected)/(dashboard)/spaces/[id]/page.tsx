@@ -61,7 +61,7 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
       ]}
     >
       <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {
-        'justify-center': !Boolean(whiteboards.length)
+        'justify-center': !Boolean(whiteboards.length) && !isLoading
       })}>
         <ShowContent
           empty={!Boolean(whiteboards.length)}

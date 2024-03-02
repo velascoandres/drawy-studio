@@ -28,8 +28,8 @@ export const ColorSelector = ({
           <div 
             key={`color-${value}`} 
             className={cn(
-              'transition ease-in w-12 h-12 cursor-pointer border-4 border-neutral-900 rounded-md', {
-                'scale-105 ring ring-amber-400': value === selectedColor
+              'transition ease-in w-12 h-12 cursor-pointer border-4 border-border rounded-md', {
+                'scale-105 ring ring-primary': value === selectedColor
               },
             )} 
             onClick={() => handleSelect(value)}

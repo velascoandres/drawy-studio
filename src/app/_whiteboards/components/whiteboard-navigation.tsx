@@ -1,27 +1,32 @@
 import React from 'react'
-import { useRouter } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import { Group,Presentation } from 'lucide-react'
 
 import { ProfileCard } from '@/app/_auth/components/profile-card'
-import { Button } from '@/app/_shared/components/ui/button'
 
 interface Props {
   whiteboardName: string
+  spaceId?: number | null
 }
 
 
-export const WhiteboardNavigation = ({ whiteboardName }: Props) => {
-  const router = useRouter()
-
-  const handleGoback = () => {
-    router.back()
-  }
+export const WhiteboardNavigation = ({ whiteboardName, spaceId }: Props) => {
 
   return (
-    <nav className="z-20 fixed inline-flex items-center justify-between bottom-4 right-[30%] left-[30%] bg-background rounded-full px-2 py-1">
-      <Button variant="ghost"  onClick={handleGoback} className="hover:text-primary/70 inline-flex items-center justify-start rounded-full rounded-full">
-        <ArrowLeft />
-      </Button>
+    <nav className="z-20 fixed inline-flex items-center justify-between bottom-4 right-[30%] left-[30%] bg-background rounded-full px-2 py-1 gap-2 border border-border">
+      <div className="inline-flex justify-start gap-2">
+        <Link href="/whiteboards" className="transition ease-in hover:text-secondary rounded-full p-2 hover:bg-secondary-foreground">
+          <Presentation />
+        </Link>
+
+        {
+          spaceId && (
+            <Link href={`/spaces/${spaceId}`} className="transition ease-in hover:text-secondary rounded-full p-2 hover:bg-secondary-foreground">
+              <Group />
+            </Link>
+          )
+        }
+      </div>
 
       <h1 className="font-bold max-w-xs text-ellipsis">{whiteboardName}</h1>
 
