@@ -1,14 +1,13 @@
 import React from 'react'
-import { Edit, MoreVertical, Trash2 } from 'lucide-react'
+import { Edit, Trash2 } from 'lucide-react'
 
-import { Button } from '@/app/_shared/components/ui/button'
 import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from '@/app/_shared/components/ui/dropdown-menu'
+  ContextMenu, 
+  ContextMenuContent, 
+  ContextMenuItem, 
+  ContextMenuSeparator, 
+  ContextMenuTrigger
+} from '@/app/_shared/components/ui/context-menu'
 import { COLORS } from '@/constants/colors'
 
 import { type Space } from '../interfaces/space'
@@ -34,20 +33,24 @@ export const SpaceCard = ({
 }: Props) => {
 
   return (
-    <article  
-      className="overflow-hidden w-full md:max-w-sm transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
-      style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
-    >
-      {
-        renderTitle ? renderTitle(space) : <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
-      }
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <article  
+          className="overflow-hidden w-full md:max-w-sm transition ease-in group relative select-none h-40 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
+          style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
+        >
+          {
+            renderTitle ? renderTitle(space) : <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
+          }
 
-      <p className="text-md whitespace-normal truncate overflow-ellipsis mb-2 w-full">
-        {space.description}
-      </p>
+          <p className="text-md whitespace-normal truncate overflow-ellipsis mb-2 w-full">
+            {space.description}
+          </p>
 
-      {children}
-    </article>
+        </article>
+        {children}
+      </ContextMenuTrigger>
+    </ContextMenu>
   )
 }
 
@@ -57,31 +60,20 @@ export const SpaceCardActions = ({
   onClickUpdate,
 }: SpaceCardActions) => { 
   return (
-    <div className="absolute top-1 right-1 text-white">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full border-none px-2 bg-transparent hover:bg-gray-800/50" style={{
-            color: space.style?.textColor
-          }}>
-            <MoreVertical />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="base-bg border-gray-800">
-          <DropdownMenuItem
-            onClick={() => onClickUpdate(space)}
-            className="cursor-pointer flex justify-start gap-2"
-          >
-            <Edit className="h-5 w-5" /> Edit
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => onClickRemove(space)}
-            className="cursor-pointer flex justify-start gap-2 text-red-600"
-          >
-            <Trash2 className="h-5 w-5" /> Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+    <ContextMenuContent>
+      <ContextMenuItem
+        onClick={() => onClickUpdate(space)}
+        className="cursor-pointer flex justify-start gap-2"
+      >
+        <Edit className="h-5 w-5" /> Edit
+      </ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem
+        onClick={() => onClickRemove(space)}
+        className="cursor-pointer flex justify-start gap-2 text-red-600"
+      >
+        <Trash2 className="h-5 w-5" /> Delete
+      </ContextMenuItem>
+    </ContextMenuContent>
   )
 }

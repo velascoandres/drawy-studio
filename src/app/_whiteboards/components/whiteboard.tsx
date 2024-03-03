@@ -6,18 +6,18 @@ import dynamic from 'next/dynamic'
 import { type ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
 import { 
   type AppState, 
-  type BinaryFileData,
   type BinaryFiles, 
   type ExcalidrawImperativeAPI, 
-  type ExcalidrawInitialDataState } from '@excalidraw/excalidraw/types/types'
+  type ExcalidrawInitialDataState 
+} from '@excalidraw/excalidraw/types/types'
 
 
 export interface Content {
   scene: {
     elements: readonly ExcalidrawElement[]
     appState?: AppState
-    files?: BinaryFileData[]
-    rawFiles?: BinaryFiles
+    files?: BinaryFiles
+    // rawFiles?: BinaryFiles
   }
 }
 
@@ -64,9 +64,7 @@ export const Whiteboard = ({
     
     const files = initialContent?.scene?.files
 
-    if (files?.length) {
-      excalidrawAPI.addFiles(files)
-    }
+    excalidrawAPI.addFiles(Object.values(files ?? {}))
 
     excalidrawAPI.updateScene({
       elements: initialContent?.scene?.elements,

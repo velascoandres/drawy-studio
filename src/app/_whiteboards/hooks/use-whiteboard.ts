@@ -56,12 +56,12 @@ export const useWhiteboard = (id: number) => {
           gridSize: appState.gridSize,
         }, 
         scrollToContent: true, 
-        files: Object.values(filesToUpdate),
-        rawFiles: filesToUpdate,
+        files: filesToUpdate,
       },
     }
 
     const areSame = compare(payload, whiteboard.content)
+
 
     if (areSame){
       return
@@ -70,7 +70,9 @@ export const useWhiteboard = (id: number) => {
     updateContent({
       id: whiteboard.id,
       content: {
-        scene: payload.scene,
+        scene: {
+          ...payload.scene,
+        },
       }
     })
   }

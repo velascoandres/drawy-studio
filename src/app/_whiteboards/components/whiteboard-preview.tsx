@@ -38,7 +38,7 @@ export const WhiteboardPreview = ({ name, content, className }: Props) => {
         ...(contentCasted.scene?.appState ?? {}),
         exportWithDarkMode: contentCasted.scene.appState?.theme === 'dark' 
       },
-      files: contentCasted.scene?.rawFiles ?? {},
+      files: contentCasted.scene?.files ?? {},
     }))
     .then(blobToBase64)
     .then((file) => setPreview(file as string))

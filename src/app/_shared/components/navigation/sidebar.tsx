@@ -20,7 +20,7 @@ export const SideNavigation = () => {
   return (
     <aside className="md:py-4 bottom-2 md:w-[200px] fixed z-20  backdrop-blur left-[15%] right-[15%] rounded-full border border-border md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-border">
       <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-white">
-        <strong className="text-primary font-bold italic">Drawy</strong> Studio
+        <strong className="font-bold italic text-[#63e]">Drawy</strong> Studio
       </Link>
 
       <div className="hidden md:px-2 md:block">
