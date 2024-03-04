@@ -119,7 +119,7 @@ export const CreateUpdateWhiteboard = ({
           />
           <DialogFooter>
             <Button
-              disabled={!form.formState.isValid}
+              disabled={ isCreating || isUpdating  }
               type="submit"
             >
               <div className="flex justify-center md:justify-start items-center gap-2">

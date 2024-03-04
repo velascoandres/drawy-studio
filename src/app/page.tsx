@@ -6,6 +6,7 @@ import { FEATURES } from '@/constants/features'
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_auth/components/sign-in-providers'
+import { Settings } from './_shared/components/navigation/settings'
 import { AnimatedBagde } from './_shared/components/ui/animated-bagde'
 import { Card, CardDescription, CardHeader, CardTitle } from './_shared/components/ui/card'
 
@@ -18,7 +19,9 @@ export default async function Home() {
     <>
       <div className="fixed -z-[1] min-h-screen w-full bg-background"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div></div>
       <main className="flex flex-col items-center justify-center text-white min-h-screen gap-4">
-  
+        <div className="fixed top-1 right-1 text-primary">
+          <Settings />
+        </div>
         <section className="flex flex-col items-center justify-center gap-12 px-4 py-16">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem] text-primary">
       Welcome to <strong className="italic text-[#63e] font-bold">Drawy</strong> Studio
@@ -35,7 +38,7 @@ export default async function Home() {
                 className="flex items-center transition ease-in group rounded-full text-white pl-4 pr-2 py-3 font-semibold no-underline "
               >
                 <AnimatedBagde style="purple">
-                  <span className="transition ease-in group-hover:text-white dark:group-hover:text-[#63e]">Continue to dashboard </span>
+                  <span className="transition ease-in text-white dark:group-hover:text-[#63e]">Continue to dashboard </span>
                   <ChevronRight className="transition ease-out duration-200 group-hover:translate-x-1 group-hover:text-white dark:group-hover:text-[#63e]" />
                 </AnimatedBagde>
               </Link>) : (

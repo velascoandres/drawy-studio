@@ -90,8 +90,6 @@ export const CreateUpdateSpace = ({
     }
   }
 
-  const hasErrors = !form.formState.isValid
-
   return (
     <DialogContent 
       className="h-screen xl:h-auto md:max-w-3xl overflow-y-auto" 
@@ -196,7 +194,7 @@ export const CreateUpdateSpace = ({
 
           <DialogFooter>
             <Button
-              disabled={ isCreating || isUpdating || hasErrors }
+              disabled={ isCreating || isUpdating  }
               type="submit"
 
             >

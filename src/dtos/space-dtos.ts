@@ -11,8 +11,8 @@ export const StyleDto = z.object({
 })
 
 export const CreateSpaceDto = z.object({
-  name: z.string().min(2),
-  description: z.string().optional(),
+  name: z.string().min(1, 'A name is required').max(15, 'The name must be a maximum of 15 characters.'),
+  description: z.string().max(180, 'The description must be a maximum of 180 characters.').optional(),
   style: StyleDto.optional(),
 })
   

@@ -3,15 +3,15 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Coffee,Github } from 'lucide-react'
 
 import { ProfileCard } from '@/app/_auth/components/profile-card'
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
-import { LINKS } from '@/constants/links'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
 import { ThemeToggler } from '../theme/theme-toggler'
+
+import { Settings } from './settings'
 
 
 const menuItems = Object.values(NAVIGATION)
@@ -62,26 +62,9 @@ export const SideNavigation = () => {
       <div className="block px-[35%]">
       </div>
 
-      <ul className="invisible md:visible absolute bottom-1 inline-flex  list-none left-[10%] right-[10%] text-sm">
-        <li className="relative flex items-center w-full">
-          <ThemeToggler />
-        </li>
-        <li className="relative flex items-center w-full">
-          <Link href={LINKS.GITHIB_REPOSITORY} 
-            className="transition ease-in rounded-full hover:bg-secondary p-3"
-          >
-            <Github />
-          </Link>
-        </li>
-
-        <li className="relative flex items-center w-full">
-          <Link href={LINKS.BUY_ME_COFEE} 
-            className="transition ease-in rounded-full hover:bg-secondary p-3"
-          >
-            <Coffee className="text-amber-400" />
-          </Link>
-        </li>
-      </ul>
+      <div className="invisible md:visible absolute bottom-1 left-[10%] right-[10%]">
+        <Settings />
+      </div>
     </aside>
   )
 }

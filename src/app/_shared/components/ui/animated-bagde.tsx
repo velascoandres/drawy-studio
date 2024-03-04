@@ -38,7 +38,7 @@ const innerContainerVariants = cva(
       fill: {
         yellow: 'bg-yellow-300/60',
         blue: 'bg-blue-300',
-        black: 'bg-gray-black/50 dark:bg-black',
+        black: 'bg-black/10 dark:bg-black',
         red: 'bg-red-300',
         purple: 'bg-purple-300',
       },

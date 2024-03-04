@@ -30,6 +30,7 @@ const findUserSpaces = async (db: PostgresJsDatabase<typeof schema>, options: Op
   const data = await db.query.spaces.findMany({
     where: baseFilter,
     limit: perPage,
+    orderBy: (spaces, { desc }) => [desc(spaces.createdAt)],
     offset: perPage * (page - 1)
   })
 
