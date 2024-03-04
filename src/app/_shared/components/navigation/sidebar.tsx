@@ -11,6 +11,8 @@ import { LINKS } from '@/constants/links'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
+import { ThemeToggler } from '../theme/theme-toggler'
+
 
 const menuItems = Object.values(NAVIGATION)
 
@@ -19,15 +21,17 @@ export const SideNavigation = () => {
 
   return (
     <aside className="md:py-4 bottom-2 md:w-[200px] fixed z-20  backdrop-blur left-[15%] right-[15%] rounded-full border border-border md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-border">
-      <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-white">
+      <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-primary">
         <strong className="font-bold italic text-[#63e]">Drawy</strong> Studio
       </Link>
 
       <div className="hidden md:px-2 md:block">
         <ProfileCard />
       </div>
+    
+
       <nav className="flex flex-col items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
-        
+
         <ul className="text-sm inline-flex items-center gap-10 justify-center md:flex md:flex-col md:justify-start md:items-start md:w-full md:gap-5">
           {
             menuItems.map(({ name, icon: IconComponent, path }) => (
@@ -47,10 +51,21 @@ export const SideNavigation = () => {
           <li className="block md:hidden">
             <ProfileMenu />
           </li>
+
+          <li className="block md:hidden">
+            <ThemeToggler />
+          </li>
         </ul>
       </nav>
 
-      <ul className="invisible md:visible absolute bottom-1 inline-flex  list-none left-[25%] right-[25%] text-sm">
+
+      <div className="block px-[35%]">
+      </div>
+
+      <ul className="invisible md:visible absolute bottom-1 inline-flex  list-none left-[10%] right-[10%] text-sm">
+        <li className="relative flex items-center w-full">
+          <ThemeToggler />
+        </li>
         <li className="relative flex items-center w-full">
           <Link href={LINKS.GITHIB_REPOSITORY} 
             className="transition ease-in rounded-full hover:bg-secondary p-3"

@@ -38,23 +38,23 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
     <ContextMenu>
       <ContextMenuTrigger>
         <article 
-          className=" w-full md:max-w-sm  gap-4 border-2  hover:border-white flex flex-col items-start bg-gradient-to-br from-gray-900 to-indigo-950 break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
+          className=" w-full md:max-w-sm  gap-4 border-2  hover:border-primary flex flex-col items-start break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
         >
           <div className="group relative w-full h-full flex overflow-hidden flex-col items-center">
-            <WhiteboardPreview className="rounded-md" name={name} content={content} />
+            <WhiteboardPreview name={name} content={content} />
             <div 
               className="h-full  transition ease-in bg-gradient-to-br from-gray-900 to-secondary/60 absolute bottom-0 w-full px-2 flex flex-col justify-between gap-2 break-words text-ellipsis"
           
             >
               <div className="flex flex-col gap-2 pt-2">
                 <Link href={`/whiteboard/${whiteboard.id}`} className="cursor-pointer transition ease-in w-full">
-                  <h4 className="text-primary text-lg font-bold select-none flex items-center line-clamp-1 text-ellipsis hover:underline tracking-tight">
+                  <h4 className="text-secondary dark:text-primary text-lg font-bold select-none flex items-center line-clamp-1 text-ellipsis hover:underline tracking-tight">
                     {name}
                   </h4>
                 </Link>
 
 
-                <p className="font-medium text-sm text-ellipsis text-pretty text-primary/70">
+                <p className="font-medium text-sm text-ellipsis text-pretty text-secondary/85 dark:text-primary/70">
                   {description}
                 </p>
               </div>
