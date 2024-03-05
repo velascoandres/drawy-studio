@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { FilePenLine, Split, Trash2 } from 'lucide-react'
+import { Braces,FileImage,FilePenLine, ImageDown,Split, Trash2 } from 'lucide-react'
 
 import { 
   ContextMenu, 
@@ -29,6 +29,9 @@ interface WhiteboardActionsProps {
   onClickDelete(): void
   onClickUpdate(): void
   onClickDetach(): void
+  onClickExportPng(): void
+  onClickExportJson(): void
+  onClickDownloadSvg(): void
 }
 
 export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
@@ -77,17 +80,46 @@ export const WhiteboardActions = ({
   whiteboard,
   onClickDelete,
   onClickUpdate,
-  onClickDetach
+  onClickDetach,
+  onClickDownloadSvg,
+  onClickExportJson,
+  onClickExportPng,
 }: WhiteboardActionsProps) => {
   
   return (
-    <ContextMenuContent>
+    <ContextMenuContent className="bg-popover/60 backdrop-blur-md">
       <ContextMenuItem
         onClick={onClickUpdate}
         className="cursor-pointer flex justify-start gap-2"
       >
         <FilePenLine className="h-5 w-5" /> Edit information
       </ContextMenuItem>
+
+      <ContextMenuSeparator />
+
+      <ContextMenuItem
+        onClick={onClickDownloadSvg}
+        className="cursor-pointer flex justify-start gap-2"
+      >
+        <ImageDown className="h-5 w-5" /> Download as SVG
+      </ContextMenuItem>
+
+      <ContextMenuSeparator />
+
+      <ContextMenuItem
+        onClick={onClickExportJson}
+        className="cursor-pointer flex justify-start gap-2"
+      >
+        <Braces className="h-5 w-5" /> Copy to clipboard as JSON
+      </ContextMenuItem>
+
+      <ContextMenuItem
+        onClick={onClickExportPng}
+        className="cursor-pointer flex justify-start gap-2"
+      >
+        <FileImage className="h-5 w-5" /> Copy to clipboard as PNG
+      </ContextMenuItem>
+
       <ContextMenuSeparator />
       {
         whiteboard.space && (

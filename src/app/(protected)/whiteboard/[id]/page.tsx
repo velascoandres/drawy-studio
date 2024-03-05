@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'next/navigation'
 
 import { type Content, Whiteboard } from '@/app/_whiteboards/components/whiteboard'
@@ -11,6 +11,14 @@ const WhiteboardPage = () => {
   const params = useParams()
 
   const { onChangeHandler, whiteboard } = useWhiteboard(Number(params.id))
+
+  useEffect(() => {
+    if (!whiteboard){
+      return
+    }
+
+    document.title = `${whiteboard.name} | Drawy`
+  }, [whiteboard])
 
 
   return (

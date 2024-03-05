@@ -26,6 +26,9 @@ const WhiteboardsPage = () => {
     openUpdateWhiteboard,
     openRemoveWhiteboard,
     openDetachSpace,
+    copyToClipboardJson,
+    copyToClipboardPng,
+    downloadSvg,
   } = useWhiteboardList()
 
   return (
@@ -37,7 +40,7 @@ const WhiteboardsPage = () => {
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
     >
-      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {
+      <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0 lg:mb-2', {
         'justify-center': !Boolean(whiteboards.length) && !isLoading
       })}>
         <ShowContent
@@ -62,7 +65,10 @@ const WhiteboardsPage = () => {
                   whiteboard={whiteboard} 
                   onClickDelete={() => openRemoveWhiteboard(whiteboard)} 
                   onClickUpdate={() => openUpdateWhiteboard(whiteboard)}
-                  onClickDetach={() => openDetachSpace(whiteboard)}                    
+                  onClickDetach={() => openDetachSpace(whiteboard)}       
+                  onClickExportJson={() => copyToClipboardJson(whiteboard)}             
+                  onClickExportPng={() => copyToClipboardPng(whiteboard)}             
+                  onClickDownloadSvg={() => downloadSvg(whiteboard)}             
                 />
               </WhiteboardCard>
             ))}

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Merge } from 'lucide-react'
 
 import { ManagementPageLayout } from '@/app/_shared/components/layout/management-layout'
@@ -36,11 +36,23 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
     openCreateWhiteboard,
     openAttachSpace,
     openDetachSpace,
+    copyToClipboardJson,
+    copyToClipboardPng,
+    downloadSvg,
   } = useWhiteboardList({
     query: {
       spaceId,
     }
   })
+
+  useEffect(() => {
+    if (!currentSpace){
+      return
+    }
+
+    document.title = `${currentSpace.name} | Drawy`
+  }, [currentSpace])
+
 
   if (!currentSpace){
     return null
@@ -85,7 +97,10 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
                   whiteboard={whiteboard} 
                   onClickDelete={() => openRemoveWhiteboard(whiteboard)} 
                   onClickUpdate={() => openUpdateWhiteboard(whiteboard)}
-                  onClickDetach={() => openDetachSpace(whiteboard)}                    
+                  onClickDetach={() => openDetachSpace(whiteboard)}
+                  onClickExportJson={() => copyToClipboardJson(whiteboard)}             
+                  onClickExportPng={() => copyToClipboardPng(whiteboard)}             
+                  onClickDownloadSvg={() => downloadSvg(whiteboard)}                         
                 />
               </WhiteboardCard>
             ))}

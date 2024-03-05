@@ -79,7 +79,7 @@
 
   @keyframes nav-header-shadown {
     to {
-      @apply shadow-lg backdrop-blur bg-gradient-to-br from-primary-foreground to-primary/10;
+      @apply shadow-lg backdrop-blur-md bg-background/60;
     }
   }
 
