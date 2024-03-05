@@ -4,6 +4,8 @@ import React from 'react'
 import { useTheme } from 'next-themes'
 import { Moon,Sun } from 'lucide-react'
 
+import { cn } from '@/lib/utils'
+
 import { Button } from '../ui/button'
 
 export const ThemeToggler = () => {
@@ -16,9 +18,12 @@ export const ThemeToggler = () => {
 
   return (
     <Button onClick={changeTheme} variant="ghost">
-      {
-        theme === 'dark' ? <Moon /> : <Sun />
-      }
+      <Moon className={cn('hidden', {
+        'block': theme === 'dark'
+      })} />
+      <Sun className={cn('hidden', {
+        'block': theme === 'light'
+      })} />
     </Button>
   )
 }

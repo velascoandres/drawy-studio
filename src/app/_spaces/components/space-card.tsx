@@ -60,7 +60,7 @@ export const SpaceCardActions = ({
   onClickUpdate,
 }: SpaceCardActions) => { 
   return (
-    <ContextMenuContent>
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
       <ContextMenuItem
         onClick={() => onClickUpdate(space)}
         className="cursor-pointer flex justify-start gap-2"

@@ -87,7 +87,7 @@ export const WhiteboardActions = ({
 }: WhiteboardActionsProps) => {
   
   return (
-    <ContextMenuContent className="bg-popover/60 backdrop-blur-md">
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
       <ContextMenuItem
         onClick={onClickUpdate}
         className="cursor-pointer flex justify-start gap-2"
