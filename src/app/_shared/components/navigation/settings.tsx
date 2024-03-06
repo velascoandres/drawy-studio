@@ -10,7 +10,7 @@ import { ThemeToggler } from '../theme/theme-toggler'
 
 export const Settings = () => {
   return (
-    <div className="inline-flex">
+    <div className="inline-flex gap-2">
       <div className="relative flex items-center w-full">
         <ThemeToggler />
       </div>
