@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 
 export const ThemeToggler = () => {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme = 'dark' } = useTheme()
 
   const changeTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
@@ -17,7 +17,7 @@ export const ThemeToggler = () => {
 
 
   return (
-    <Button onClick={changeTheme} variant="ghost">
+    <Button onClick={changeTheme} variant="ghost" className="rounded-full p-2">
       <Moon className={cn('hidden', {
         'block': theme === 'dark'
       })} />
