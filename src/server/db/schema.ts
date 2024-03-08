@@ -1,6 +1,7 @@
 import { type AdapterAccount } from 'next-auth/adapters'
 import { relations, sql } from 'drizzle-orm'
 import {
+  boolean,
   index,
   integer,
   json,
@@ -9,8 +10,7 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core'
+  varchar } from 'drizzle-orm/pg-core'
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -134,6 +134,7 @@ export const whiteboards = createTable(
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
     updatedAt: timestamp('updatedAt'),
+    isPublic: boolean('isPublic').default(false)
   },
   (whiteboard) => ({
     createdByIdIdx: index('whiteboard_createdById_idx').on(whiteboard.createdById),
