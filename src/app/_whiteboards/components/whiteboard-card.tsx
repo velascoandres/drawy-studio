@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Braces,FileImage,FilePenLine, ImageDown,Link as LinkIcon,Split, Trash2 } from 'lucide-react'
 
-import { AnimatedBagde } from '@/app/_shared/components/ui/animated-bagde'
 import { 
   ContextMenu, 
   ContextMenuContent, 
