@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Braces,FileImage,FilePenLine, ImageDown,Split, Trash2 } from 'lucide-react'
+import { Braces,FileImage,FilePenLine, ImageDown,Link as LinkIcon,Split, Trash2 } from 'lucide-react'
 
+import { AnimatedBagde } from '@/app/_shared/components/ui/animated-bagde'
 import { 
   ContextMenu, 
   ContextMenuContent, 
@@ -10,6 +11,7 @@ import {
   ContextMenuSeparator, 
   ContextMenuTrigger
 } from '@/app/_shared/components/ui/context-menu'
+import { toast } from '@/app/_shared/hooks/use-toast'
 import { SpaceBadge } from '@/app/_spaces/components/space-badge'
 
 import { type  Whiteboard } from '../interfaces/whiteboard'
@@ -64,8 +66,13 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
 
               <div className="inline-flex justify-start mb-2 gap-2 items-center">
                 { whiteboard.space && <Link href={`/spaces/${whiteboard.space.id}`} className="hover:scale-105 transition ease-in hover:border-primary"> <SpaceBadge space={whiteboard.space} /></Link>}
+                
               </div>
-          
+              {
+                whiteboard.isPublic && <Link href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-indigo-600 rounded-tl-sm px-4">
+                  <span className="text-sm">Public</span>
+                </Link>
+              }
             </div>
           </div>
         </article>
@@ -85,6 +92,16 @@ export const WhiteboardActions = ({
   onClickExportJson,
   onClickExportPng,
 }: WhiteboardActionsProps) => {
+
+  const handleCopyClipboard = (content: string) => {
+    void navigator.clipboard.writeText(content)
+
+    toast({
+      title: '✅ Copied to clipboard',
+      description: content,
+      duration: 2000,
+    })
+  }
   
   return (
     <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
@@ -105,6 +122,16 @@ export const WhiteboardActions = ({
       </ContextMenuItem>
 
       <ContextMenuSeparator />
+      {
+        whiteboard.isPublic && (
+          <ContextMenuItem
+            onClick={() => handleCopyClipboard(`${window.location.origin}/view-whiteboard/${whiteboard.id}`)}
+            className="cursor-pointer flex justify-start gap-2"
+          >
+            <LinkIcon className="h-5 w-5" /> Copy public link
+          </ContextMenuItem>
+        )
+      }
 
       <ContextMenuItem
         onClick={onClickExportJson}

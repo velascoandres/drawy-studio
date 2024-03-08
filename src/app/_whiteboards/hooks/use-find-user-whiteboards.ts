@@ -32,6 +32,7 @@ export const useFindUserWhiteboards = (options: Options) => {
     return response.data.map((whiteboard) => ({
       ...whiteboard,
       description: whiteboard.description ?? '',
+      isPublic: whiteboard?.isPublic ?? false,
       space: whiteboard.space ? transformSpace(whiteboard?.space) : undefined,
     }))
   }, [response?.data])

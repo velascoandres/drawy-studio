@@ -21,10 +21,14 @@ export interface Content {
   }
 }
 
+
+export type WhiteboardChangeEventHandler = (elements: readonly ExcalidrawElement[], appState?: AppState, files?: BinaryFiles) => void
+
 interface Props {
   id: number
+  viewModeEnabled?: boolean
   initialContent?: Content
-  onChange(elements: readonly ExcalidrawElement[], appState?: AppState, files?: BinaryFiles): void
+  onChange?: WhiteboardChangeEventHandler
 }
 
 const Excalidraw = dynamic(
@@ -43,7 +47,8 @@ const WelcomeScreen = dynamic(
 
 export const Whiteboard = ({
   initialContent,
-  onChange,
+  onChange = () => null,
+  viewModeEnabled = false
 }: Props) => {
   const [excalidrawAPI, setExcalidrawApi] = useState<ExcalidrawImperativeAPI | null>(null)
   const hasLoadedWhiteboardRef = useRef<boolean>(false)
@@ -85,6 +90,7 @@ export const Whiteboard = ({
       initialData={{
         ...(initialContent?.scene ?? {}) as ExcalidrawInitialDataState 
       }}
+      viewModeEnabled={viewModeEnabled}
     >
       <WelcomeScreen />
     </Excalidraw>

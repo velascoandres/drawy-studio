@@ -3,7 +3,7 @@ import { SearchUserSpaceDto } from '@/dtos/space-dtos'
 import { 
   CreateWhiteboardDto, 
   UpdateWhiteboardContentDto, 
-  UpdateWhiteboardDto 
+  UpdateWhiteboardDto,
 } from '@/dtos/whiteboard-dtos'
 import {
   createTRPCRouter,
@@ -44,6 +44,11 @@ export const whiteboardRouter = createTRPCRouter({
     ...input,
     userId: ctx.session.user.id
   })),
+  // changeVisibility: protectedProcedure.input(UpdateWhiteboardVisibilityDto)
+  // .mutation(({ ctx, input }) => changeWhiteboardVisibility(ctx.db, {
+  //   ...input,
+  //   userId: ctx.session.user.id
+  // })),
   findUserWhiteboards: protectedProcedure.input(SearchUserSpaceDto)
   .query(({ ctx, input }) => findUserWhiteboards(ctx.db, {
     ...input,

@@ -13,7 +13,7 @@ type Options = z.infer<typeof UpdateWhiteboardDto> & {userId: string}
 
 
 const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { id, name, description, userId } = options
+  const { id, name, description, isPublic, userId } = options
 
   const currentWhiteboard = await db.query.whiteboards.findFirst({
     where: (whiteboards, { eq }) => eq(whiteboards.id, id),
@@ -36,6 +36,7 @@ const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, optio
   const [updated] = await db.update(whiteboards).set({
     name,
     description,
+    isPublic,
   }).where(eq(whiteboards.id, id)).returning()
 
   return updated

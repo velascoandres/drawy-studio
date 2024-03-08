@@ -5,5 +5,6 @@ export interface Whiteboard {
     name: string
     description?: string
     space?: Space
+    isPublic: boolean
     content: unknown
 }

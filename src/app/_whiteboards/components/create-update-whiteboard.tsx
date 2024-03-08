@@ -24,6 +24,7 @@ import {
   FormMessage 
 } from '@/app/_shared/components/ui/form'
 import { Input } from '@/app/_shared/components/ui/input'
+import { Switch } from '@/app/_shared/components/ui/switch'
 import { Textarea } from '@/app/_shared/components/ui/textarea'
 import { CreateWhiteboardDto } from '@/dtos/whiteboard-dtos'
 import { cn } from '@/lib/utils'
@@ -50,6 +51,7 @@ export const CreateUpdateWhiteboard = ({
       name: whiteboard?.name ?? '',
       description: whiteboard?.description ?? '',
       spaceId: targetSpaceId ?? null,
+      isPublic: whiteboard?.isPublic ?? false,
     },
   })
 
@@ -114,6 +116,29 @@ export const CreateUpdateWhiteboard = ({
                     Provide a short description
                 </FormDescription>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="isPublic"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                <div className="space-y-0.5">
+                  <FormLabel>Visibility</FormLabel>
+                  <FormDescription>
+                      Make this whiteboard <strong className="font-bold text-destructive text-base">public</strong>. 
+                    <p className="text-xs">
+                      The content of the whiteboard can be shared through a given public link but cannot be edited (read-only mode).
+                    </p>
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />
