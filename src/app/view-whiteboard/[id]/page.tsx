@@ -3,7 +3,8 @@
 import React from 'react'
 import { redirect } from 'next/navigation'
 
-import { type Content, Whiteboard } from '@/app/_whiteboards/components/whiteboard'
+import { type Content,Whiteboard } from '@/app/_whiteboards/components/whiteboard'
+import { type Whiteboard as WitheboardType } from '@/app/_whiteboards/interfaces/whiteboard'
 import findPublicWhiteboardById from '@/server/api/whiteboard/usecases/find-public-whiteboard'
 import { db } from '@/server/db'
 
@@ -15,7 +16,7 @@ const getWhiteboard = async (id: number) => {
     redirect('/not-found')
   }
 
-  return whiteboard
+  return whiteboard as unknown as WitheboardType & {content: undefined | Content}
 }
 
 
@@ -23,7 +24,7 @@ const getWhiteboard = async (id: number) => {
 const WhitebardViewPage = async ({ params }: {params: {id: string}}) => {
   const whiteboardId = Number(params.id)
  
-  const whiteboard = await getWhiteboard(whiteboardId)
+  const whiteboard: WitheboardType = await getWhiteboard(whiteboardId)
   
   return (
     <main className="h-screen w-screen">
