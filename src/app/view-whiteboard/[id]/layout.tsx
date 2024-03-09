@@ -10,7 +10,7 @@ import { db } from '@/server/db'
 export async function generateMetadata({ params }: {params: {id: string}}, parent: ResolvingMetadata) {
   const id = Number(params.id)
 
-  const whiteboard = await findPublicWhiteboardById(db, { id })
+  const whiteboard = await findPublicWhiteboardById(db, { id, omitContent: true })
 
 
   if (!whiteboard){
@@ -18,7 +18,6 @@ export async function generateMetadata({ params }: {params: {id: string}}, paren
   }
 
 
-  const previousImages = (await parent).openGraph?.images ?? []
   const previousDescription = (await parent).openGraph?.description ?? ''
 
   return {
@@ -28,7 +27,11 @@ export async function generateMetadata({ params }: {params: {id: string}}, paren
       title: whiteboard.name,
       description: whiteboard.description ?? previousDescription,
       url: 'https://drawy-studio.vercel.app/',
-      images: [...previousImages],
+      images: [{ 
+        url: 'https://drawy-studio.vercel.app/preview.jpg',        
+        width: 1200,
+        height: 630, 
+      }],
       siteName: 'Drawy studio',
     }
   } as Metadata
