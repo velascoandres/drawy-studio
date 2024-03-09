@@ -5,13 +5,22 @@ import { type SearchByIdDto } from '@/dtos/shared-dtos'
 import type * as schema from '@/server/db/schema'
 import { NotFound } from '@/server/exceptions/not-found'
 
-type Options = z.infer<typeof SearchByIdDto>
+
+type Options = z.infer<typeof SearchByIdDto> & {omitContent?: boolean}
 
 const findPublicWhiteboardById = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { id } = options
+  const { id, omitContent } = options
   
   const currentWhiteboard = await db.query.whiteboards.findFirst({
-    where: (whiteboards, { eq, and }) => and(eq(whiteboards.id, id), eq(whiteboards.isPublic, true))
+    where: (whiteboards, { eq, and }) => and(eq(whiteboards.id, id), eq(whiteboards.isPublic, true)),
+    columns: {
+      id: true,
+      name: true,
+      description: true,
+      content: omitContent ? false : true,
+      createdAt: true,
+      updatedAt: true,
+    }
   })
 
   if (!currentWhiteboard){

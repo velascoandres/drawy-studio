@@ -31,7 +31,7 @@ const updateWhiteboardContent = async (db: PostgresJsDatabase<typeof schema>, op
 
   return db.update(whiteboards).set({
     content
-  }).where(eq(whiteboards.id, id)).returning()
+  }).where(eq(whiteboards.id, id))
 }
 
 
