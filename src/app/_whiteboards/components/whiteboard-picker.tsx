@@ -17,7 +17,7 @@ interface Props {
  attachedSpace?: boolean
  selectedWhiteboard?: Whiteboard
 
- onWhiteboardSelect: (whiteboard: Whiteboard | undefined) => void
+ onWhiteboardSelect: (whiteboard: Omit<Whiteboard, 'content'> | undefined) => void
 }
 
 
