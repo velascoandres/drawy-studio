@@ -2,6 +2,7 @@ import { useToast } from '@/app/_shared/hooks/use-toast'
 import { useModalStore } from '@/app/_shared/store/modal-store'
 import { api } from '@/trpc/react'
 
+
 export const useUpdateWhiteboard = () => {
   const { closeModal } = useModalStore()
   const utils = api.useUtils() 
@@ -24,7 +25,7 @@ export const useUpdateWhiteboard = () => {
 
       
       closeModal()
-    }
+    },
   })
 
   return {

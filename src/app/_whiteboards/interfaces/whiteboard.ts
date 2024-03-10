@@ -7,4 +7,5 @@ export interface Whiteboard {
     space?: Space
     isPublic: boolean
     content: unknown
+    previewUrl?: string
 }

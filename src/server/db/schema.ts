@@ -11,6 +11,7 @@ import {
   text,
   timestamp,
   varchar } from 'drizzle-orm/pg-core'
+import { nullable } from 'zod'
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -129,6 +130,7 @@ export const whiteboards = createTable(
     .references(() => users.id, { onDelete: 'cascade' }),
     spaceId: integer('spaceId').references(() => spaces.id),
     description: varchar('description'),
+    previewUrl: varchar('previewUrl'),
     content: json('content').default({}),
     createdAt: timestamp('created_at')
     .default(sql`CURRENT_TIMESTAMP`)

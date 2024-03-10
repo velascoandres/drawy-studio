@@ -26,9 +26,6 @@ const WhiteboardsPage = () => {
     openUpdateWhiteboard,
     openRemoveWhiteboard,
     openDetachSpace,
-    copyToClipboardJson,
-    copyToClipboardPng,
-    downloadSvg,
   } = useWhiteboardList()
 
   return (
@@ -65,10 +62,7 @@ const WhiteboardsPage = () => {
                   whiteboard={whiteboard} 
                   onClickDelete={() => openRemoveWhiteboard(whiteboard)} 
                   onClickUpdate={() => openUpdateWhiteboard(whiteboard)}
-                  onClickDetach={() => openDetachSpace(whiteboard)}       
-                  onClickExportJson={() => copyToClipboardJson(whiteboard)}             
-                  onClickExportPng={() => copyToClipboardPng(whiteboard)}             
-                  onClickDownloadSvg={() => downloadSvg(whiteboard)}             
+                  onClickDetach={() => openDetachSpace(whiteboard)}              
                 />
               </WhiteboardCard>
             ))}

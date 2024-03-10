@@ -43,7 +43,10 @@ const findUserWhiteboards = async (db: PostgresJsDatabase<typeof schema>, option
     offset: perPage * (page - 1),
     orderBy: (whiteboards, { desc }) => [desc(whiteboards.createdAt)],
     with: {
-      space: true
+      space: true, 
+    },
+    columns: {
+      content: false,
     }
   })
 

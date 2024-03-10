@@ -27,6 +27,8 @@ jobs:
           envkey_GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
           envkey_GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
 
+          envkey_CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+
           file_name: .env
           fail_on_empty: false  
 

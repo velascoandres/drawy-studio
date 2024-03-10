@@ -45,7 +45,7 @@ export const WhiteboardPicker = ({
   }
 
 
-  const handleSelect = (whiteboard: Whiteboard | undefined) => {
+  const handleSelect = (whiteboard: Omit<Whiteboard, 'content'> | undefined) => {
     setSelectedWhiteboard(whiteboard)
     onWhiteboardSelect(whiteboard)
   }
@@ -91,9 +91,7 @@ export const WhiteboardPicker = ({
               )
             }
           </div>   
-        </div>
-             
-              
+        </div>      
       </ShowContent>
     </section>
   )

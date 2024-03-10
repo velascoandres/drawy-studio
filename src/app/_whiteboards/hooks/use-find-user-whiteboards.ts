@@ -34,6 +34,7 @@ export const useFindUserWhiteboards = (options: Options) => {
       description: whiteboard.description ?? '',
       isPublic: whiteboard?.isPublic ?? false,
       space: whiteboard.space ? transformSpace(whiteboard?.space) : undefined,
+      previewUrl: whiteboard.previewUrl ?? '',
     }))
   }, [response?.data])
 

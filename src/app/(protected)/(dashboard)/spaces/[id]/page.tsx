@@ -36,9 +36,6 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
     openCreateWhiteboard,
     openAttachSpace,
     openDetachSpace,
-    copyToClipboardJson,
-    copyToClipboardPng,
-    downloadSvg,
   } = useWhiteboardList({
     query: {
       spaceId,
@@ -97,10 +94,7 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
                   whiteboard={whiteboard} 
                   onClickDelete={() => openRemoveWhiteboard(whiteboard)} 
                   onClickUpdate={() => openUpdateWhiteboard(whiteboard)}
-                  onClickDetach={() => openDetachSpace(whiteboard)}
-                  onClickExportJson={() => copyToClipboardJson(whiteboard)}             
-                  onClickExportPng={() => copyToClipboardPng(whiteboard)}             
-                  onClickDownloadSvg={() => downloadSvg(whiteboard)}                         
+                  onClickDetach={() => openDetachSpace(whiteboard)}                        
                 />
               </WhiteboardCard>
             ))}

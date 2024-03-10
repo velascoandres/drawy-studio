@@ -39,7 +39,13 @@ const updateUserWhiteboard = async (db: PostgresJsDatabase<typeof schema>, optio
     isPublic,
   }).where(eq(whiteboards.id, id)).returning()
 
-  return updated
+  return {
+    id: updated?.id,
+    name: updated?.name,
+    description: updated?.description,
+    createdAt: updated?.createdAt,
+    updatedAt: updated?.updatedAt,
+  }
 }
 
 

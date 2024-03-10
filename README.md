@@ -17,6 +17,8 @@ NEXTAUTH_URL=""
 # Next Auth Github Provider
 GH_CLIENT_ID=""
 GH_CLIENT_SECRET=""
+
+CLOUDINARY_URL=""
 ```
 
 Install dependencies.

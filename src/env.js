@@ -31,7 +31,8 @@ export const env = createEnv({
     ),
     GH_CLIENT_ID: z.string(),
     GH_CLIENT_SECRET: z.string(),
-    DATABASE_PORT: z.string()
+    DATABASE_PORT: z.string(),
+    CLOUDINARY_URL: z.string(),
   },
 
   /**
@@ -55,6 +56,7 @@ export const env = createEnv({
     GH_CLIENT_ID: process.env.GH_CLIENT_ID,
     GH_CLIENT_SECRET: process.env.GH_CLIENT_SECRET,
     DATABASE_PORT: process.env.DATABASE_PORT,
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

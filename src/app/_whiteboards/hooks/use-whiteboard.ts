@@ -8,8 +8,10 @@ import { type AppState, type BinaryFiles } from '@excalidraw/excalidraw/types/ty
 import { useQueryClient } from '@tanstack/react-query'
 
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
+import * as exportUtils from '@/lib/export-whiteboard' 
 import { api } from '@/trpc/react'
 
+import { type Content } from '../components/whiteboard'
 import { type Whiteboard } from '../interfaces/whiteboard'
 
 
@@ -94,18 +96,33 @@ export const useWhiteboard = (id: number) => {
       return
     }
 
-    updateContent({
+    const updatedWhitheboard = {
       id: currentWhiteboard.id,
       content: {
         scene: {
           ...payload.scene,
         },
       }
-    })
+    }
+
+    updateContent(updatedWhitheboard)
+
+    void updatePreview(updatedWhitheboard as Whiteboard)
   }
 
   const onChangeHandler = (elements: ExcalidrawElement[], appState: AppState, files?: BinaryFiles) => {
     debounce(() => handleChange(elements, appState, files))
+  }
+
+
+  const updatePreview = async (whiteboard: Whiteboard) => {
+    const file = await exportUtils.exportToPng(whiteboard.content as Content)
+
+    const formData = new FormData()
+
+    formData.append('file', file)
+
+    void fetch(`/api/preview/${whiteboard.id}`, { method: 'POST', body: formData })
   }
 
   useEffect(() => {

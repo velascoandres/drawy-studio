@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Braces,FileImage,FilePenLine, ImageDown,Link as LinkIcon,Split, Trash2 } from 'lucide-react'
+import { FilePenLine, Link as LinkIcon,Split, Trash2 } from 'lucide-react'
 
 import { 
   ContextMenu, 
@@ -19,24 +19,21 @@ import { WhiteboardPreview } from './whiteboard-preview'
 
 
 interface ListItemProps {
-    whiteboard: Whiteboard
+    whiteboard: Omit<Whiteboard, 'content'>
     onClick?: (item: Whiteboard) => void
     children?: React.ReactNode
 }
 
 interface WhiteboardActionsProps {
-  whiteboard: Whiteboard
+  whiteboard: Omit<Whiteboard, 'content'>
 
   onClickDelete(): void
   onClickUpdate(): void
   onClickDetach(): void
-  onClickExportPng(): void
-  onClickExportJson(): void
-  onClickDownloadSvg(): void
 }
 
 export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
-  const { name, description, content } = whiteboard
+  const { name, description, previewUrl } = whiteboard
     
   return (
     <ContextMenu>
@@ -45,7 +42,7 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
           className=" w-full md:max-w-sm  gap-4 border-2  hover:border-primary flex flex-col items-start break-words overflow-hidden text-ellipsis transition ease-in rounded-md"         
         >
           <div className="group relative w-full h-full flex overflow-hidden flex-col items-center">
-            <WhiteboardPreview name={name} content={content} />
+            <WhiteboardPreview name={name} previewUrl={previewUrl} />
             <div 
               className="h-full  transition ease-in bg-gradient-to-br from-gray-900 to-secondary/60 absolute bottom-0 w-full px-2 flex flex-col justify-between gap-2 break-words text-ellipsis"
           
@@ -87,9 +84,6 @@ export const WhiteboardActions = ({
   onClickDelete,
   onClickUpdate,
   onClickDetach,
-  onClickDownloadSvg,
-  onClickExportJson,
-  onClickExportPng,
 }: WhiteboardActionsProps) => {
 
   const handleCopyClipboard = (content: string) => {
@@ -111,16 +105,6 @@ export const WhiteboardActions = ({
         <FilePenLine className="h-5 w-5" /> Edit information
       </ContextMenuItem>
 
-      <ContextMenuSeparator />
-
-      <ContextMenuItem
-        onClick={onClickDownloadSvg}
-        className="cursor-pointer flex justify-start gap-2"
-      >
-        <ImageDown className="h-5 w-5" /> Download as SVG
-      </ContextMenuItem>
-
-      <ContextMenuSeparator />
       {
         whiteboard.isPublic && (
           <ContextMenuItem
@@ -131,20 +115,6 @@ export const WhiteboardActions = ({
           </ContextMenuItem>
         )
       }
-
-      <ContextMenuItem
-        onClick={onClickExportJson}
-        className="cursor-pointer flex justify-start gap-2"
-      >
-        <Braces className="h-5 w-5" /> Copy to clipboard as JSON
-      </ContextMenuItem>
-
-      <ContextMenuItem
-        onClick={onClickExportPng}
-        className="cursor-pointer flex justify-start gap-2"
-      >
-        <FileImage className="h-5 w-5" /> Copy to clipboard as PNG
-      </ContextMenuItem>
 
       <ContextMenuSeparator />
       {

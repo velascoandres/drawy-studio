@@ -20,6 +20,7 @@ const findPublicWhiteboardById = async (db: PostgresJsDatabase<typeof schema>, o
       content: !omitContent ? true : false,
       createdAt: true,
       updatedAt: true,
+      previewUrl: true,
     }
   })
 

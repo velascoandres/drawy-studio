@@ -6,7 +6,7 @@ import { type Whiteboard } from '@/app/_whiteboards/interfaces/whiteboard'
 import { api } from '@/trpc/react'
 
 interface Props {
-	whiteboard: Whiteboard
+	whiteboard: Omit<Whiteboard, 'content'>
 }
 
 

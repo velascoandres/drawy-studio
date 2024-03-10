@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: {params: {id: string}}, paren
       description: whiteboard.description ?? previousDescription,
       url: 'https://drawy-studio.vercel.app/',
       images: [{ 
-        url: 'https://drawy-studio.vercel.app/preview.jpg',        
+        url: whiteboard.previewUrl ?? 'https://drawy-studio.vercel.app/preview.jpg',     
         width: 1200,
         height: 630, 
       }],

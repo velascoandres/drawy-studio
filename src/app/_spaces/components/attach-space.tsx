@@ -53,7 +53,7 @@ export const AttachWhiteboardSpace = ({
   })
 
   const { toast } = useToast()
-  const [whiteboardToAttach, setWhiteboardToAttach] = useState<Whiteboard>()
+  const [whiteboardToAttach, setWhiteboardToAttach] = useState<Omit<Whiteboard, 'content'>>()
 
 
 
@@ -81,7 +81,7 @@ export const AttachWhiteboardSpace = ({
   }
 
 
-  const handleSelect = (whiteboard: Whiteboard | undefined) => {
+  const handleSelect = (whiteboard: Omit<Whiteboard, 'content'> | undefined) => {
     setWhiteboardToAttach(whiteboard)
   }
 
@@ -125,7 +125,7 @@ export const AttachWhiteboardSpace = ({
           <div className="basis-1/2 aspect-square p-2 border border-dashed rounded-md">
             {
               whiteboardToAttach && (
-                <WhiteboardPreview key={whiteboardToAttach.id} className="rounded-md" name={whiteboardToAttach.name} content={whiteboardToAttach.content} />
+                <WhiteboardPreview key={whiteboardToAttach.id} className="rounded-md" name={whiteboardToAttach.name} previewUrl={whiteboardToAttach.previewUrl} />
               )
             }
           </div>   
