@@ -24,7 +24,7 @@ interface Props {
 export const WhiteboardPicker = ({
   onWhiteboardSelect
 }:Props) => {
-  const [selectedWhiteboard, setSelectedWhiteboard] = useState<Whiteboard>()
+  const [selectedWhiteboard, setSelectedWhiteboard] = useState<Omit<Whiteboard, 'content'>>()
   const [search, setSearch] = useState('')
   const debounce = useDebounceCallback()
 
