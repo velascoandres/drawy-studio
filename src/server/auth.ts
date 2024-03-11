@@ -4,6 +4,7 @@ import {
   type NextAuthOptions,
 } from 'next-auth'
 import { type Adapter } from 'next-auth/adapters'
+import DiscordProvider from 'next-auth/providers/discord'
 import GithubProvider from 'next-auth/providers/github'
 
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
@@ -53,6 +54,10 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: env.GH_CLIENT_ID,
       clientSecret: env.GH_CLIENT_SECRET,
+    }),
+    DiscordProvider({
+      clientId: env.DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here.

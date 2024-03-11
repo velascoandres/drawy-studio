@@ -12,13 +12,14 @@ type Options = z.infer<typeof CreateWhiteboardDto> & {userId: string}
 
 
 const createWhiteboard = async (db: PostgresJsDatabase<typeof schema>, options: Options) => {
-  const { name, description, userId, spaceId } = options
+  const { name, description, userId, spaceId, isPublic = false } = options
 
 
   const commonPayload = {
     name,
     description,
     createdById: userId,
+    isPublic
   }
 
   if (!spaceId){

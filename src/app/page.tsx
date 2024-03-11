@@ -19,7 +19,7 @@ export default async function Home() {
     <>
       <div className="fixed -z-[1] min-h-screen w-full bg-background"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div></div>
       <main className="flex flex-col items-center justify-center text-white min-h-screen gap-4">
-        <div className="fixed top-1 right-1 text-primary">
+        <div className="invisible md:visible fixed top-1 right-1 text-primary">
           <Settings />
         </div>
         <section className="flex flex-col items-center justify-center gap-12 px-4 py-16">

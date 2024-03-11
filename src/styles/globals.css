@@ -96,9 +96,4 @@
     @apply bg-secondary rounded-2xl;
   }
 
-  header {
-    animation: nav-header-shadown 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 25px;
-  }
 }
