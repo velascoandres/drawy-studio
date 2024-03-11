@@ -5,7 +5,6 @@ import compare from 'just-compare'
 
 import { type ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
 import { type AppState, type BinaryFiles } from '@excalidraw/excalidraw/types/types'
-import { useQueryClient } from '@tanstack/react-query'
 
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
 import * as exportUtils from '@/lib/export-whiteboard' 
@@ -16,41 +15,32 @@ import { type Whiteboard } from '../interfaces/whiteboard'
 
 
 export const useWhiteboard = (id: number) => {
-  const queryClient = useQueryClient()
+  const utils = api.useUtils()
 
   const { data: whiteboard, isLoading } = api.whiteboard.findUserWhiteboardById.useQuery({
-    id: Number(id),
+    id,
   }, { 
     enabled: Boolean(id),
-    cacheTime: Infinity, 
-    queryKey: ['whiteboard.findUserWhiteboardById', { id: Number(id) }],
+    cacheTime: Infinity,
+    queryKey: ['whiteboard.findUserWhiteboardById', { id }],
   })
 
   const [currentWhiteboard, setWhiteboard] = useState<typeof whiteboard>(whiteboard)
 
   
   const { mutate: updateContent } = api.whiteboard.updateUserWhiteboardContent.useMutation({
+    onSuccess: () => {
+      void utils.whiteboard.findUserWhiteboardById.invalidate()
+    },
     onMutate: async ({ content }) => {
-      await queryClient.cancelQueries(['whiteboard.findUserWhiteboardById', { id: Number(id) }])
+      
+      setWhiteboard({
+        ...currentWhiteboard,
+        content,
+      } as typeof whiteboard)
 
-      const prevWhiteboard = queryClient.getQueryData(['whiteboard.findUserWhiteboardById', { id: Number(id) }])
-    
-      queryClient.setQueryData(['whiteboard.findUserWhiteboardById', { id: Number(id) }], (old: unknown) => {
-        const oldWhiteboard = old as Whiteboard
-
-        setWhiteboard({
-          ...oldWhiteboard,
-          content,
-        } as typeof whiteboard)
-
-        return {
-          ...oldWhiteboard,
-          content,
-        }
-      })
-
-      return prevWhiteboard
-    }
+      return { currentWhiteboard }
+    },
   })
 
   const debounce = useDebounceCallback(500)
@@ -95,7 +85,7 @@ export const useWhiteboard = (id: number) => {
     if (areSame){
       return
     }
-
+    
     const updatedWhitheboard = {
       id: currentWhiteboard.id,
       content: {
