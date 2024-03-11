@@ -19,6 +19,9 @@ GH_CLIENT_ID=""
 GH_CLIENT_SECRET=""
 
 CLOUDINARY_URL=""
+
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
 ```
 
 Install dependencies.
