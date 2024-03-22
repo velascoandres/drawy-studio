@@ -9,3 +9,18 @@ export interface Whiteboard {
     content: unknown
     previewUrl?: string
 }
+
+export interface PublicWhiteboard {
+    id: number
+    name: string
+    description?: string
+    space?: Space
+    isPublic: boolean
+    content: unknown
+    previewUrl?: string
+    createdBy: {
+        id: number
+        name: string
+        image: string
+    }
+}

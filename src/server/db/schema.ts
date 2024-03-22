@@ -145,6 +145,7 @@ export const whiteboards = createTable(
 
 export const whiteboardsRelations = relations(whiteboards, ({ one }) => ({
   space: one(spaces, { fields: [whiteboards.spaceId], references: [spaces.id] }),
+  createdBy: one(users, { fields: [whiteboards.createdById], references: [users.id] }),
 }))
 
 

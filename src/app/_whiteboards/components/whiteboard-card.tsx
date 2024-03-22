@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { FilePenLine, Link as LinkIcon,Split, Trash2 } from 'lucide-react'
+import { ExternalLink,FilePenLine, Split, Trash2 } from 'lucide-react'
 
 import { 
   ContextMenu, 
@@ -65,8 +65,8 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
                 
               </div>
               {
-                whiteboard.isPublic && <Link href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-indigo-600 rounded-tl-sm px-4">
-                  <span className="text-sm">Public</span>
+                whiteboard.isPublic && <Link target="_blank" href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-[#63e] rounded-tl-sm px-4 flex items-center gap-1 py-1">
+                  <ExternalLink className="h-4 w-4" /> <span className="text-sm">Public</span>
                 </Link>
               }
             </div>
@@ -111,7 +111,7 @@ export const WhiteboardActions = ({
             onClick={() => handleCopyClipboard(`${window.location.origin}/view-whiteboard/${whiteboard.id}`)}
             className="cursor-pointer flex justify-start gap-2"
           >
-            <LinkIcon className="h-5 w-5" /> Copy public link
+            <ExternalLink className="h-5 w-5" /> Copy public link
           </ContextMenuItem>
         )
       }

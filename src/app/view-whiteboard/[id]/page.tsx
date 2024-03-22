@@ -4,7 +4,8 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 
 import { type Content,Whiteboard } from '@/app/_whiteboards/components/whiteboard'
-import { type Whiteboard as WitheboardType } from '@/app/_whiteboards/interfaces/whiteboard'
+import { WhiteboardHeader } from '@/app/_whiteboards/components/whiteboard-header'
+import { type PublicWhiteboard } from '@/app/_whiteboards/interfaces/whiteboard'
 import findPublicWhiteboardById from '@/server/api/whiteboard/usecases/find-public-whiteboard'
 import { db } from '@/server/db'
 
@@ -16,7 +17,7 @@ const getWhiteboard = async (id: number) => {
     redirect('/not-found')
   }
 
-  return whiteboard as unknown as WitheboardType & {content: undefined | Content}
+  return whiteboard as unknown as PublicWhiteboard & {content: undefined | Content}
 }
 
 
@@ -24,7 +25,7 @@ const getWhiteboard = async (id: number) => {
 const WhitebardViewPage = async ({ params }: {params: {id: string}}) => {
   const whiteboardId = Number(params.id)
  
-  const whiteboard: WitheboardType = await getWhiteboard(whiteboardId)
+  const whiteboard: PublicWhiteboard = await getWhiteboard(whiteboardId)
   
   return (
     <main className="h-screen w-screen">
@@ -33,11 +34,17 @@ const WhitebardViewPage = async ({ params }: {params: {id: string}}) => {
         id={whiteboard?.id} 
         initialContent={whiteboard?.content as Content} 
       />
-      <header className="z-[2] bg-background/70 backdrop-blur-sm fixed inline-flex py-2 justify-center items-center top-4 right-[5%] left-[5%] md:right-[15%] md:left-[15%] lg:right-[30%] lg:left-[30%] rounded-full px-2 gap-2 border border-border">
-        <h1 className="basis-2/3 text-center font-bold max-w-sm text-2xl text-ellipsis select-none">{whiteboard.name}</h1>
-      </header>
+      <WhiteboardHeader 
+        title={whiteboard.name} 
+        description={whiteboard.description ?? ''} 
+        creator={{
+          name: whiteboard.createdBy.name,
+          avatarUrl: whiteboard.createdBy.image
+        }} 
+      />
     </main>
   )
 }
+
 
 export default WhitebardViewPage

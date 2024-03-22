@@ -103,7 +103,7 @@ export const AttachWhiteboardSpace = ({
         loading={isLoading}
         fallback={<Skeleton className="h-[300px] w-full" />}
       >
-        <div className="inline-flex gap-4 w-full">
+        <div className="flex flex-col md:flex-row gap-4 w-full">
           <div className="basis-1/2 flex flex-col items-start gap-2">
             <h3 className="ml-2 mt-2 font-semibold text-base self-start text-primary">Available whiteboards: </h3>
             <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-border rounded-md">

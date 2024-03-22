@@ -2,11 +2,18 @@ import React from 'react'
 import Link from 'next/link'
 import { Group,Presentation } from 'lucide-react'
 
-import { ProfileCard } from '@/app/_auth/components/profile-card'
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
+import { 
+  NavigationMenu, 
+  NavigationMenuItem, 
+  NavigationMenuLink, 
+  NavigationMenuList, 
+  navigationMenuTriggerStyle
+} from '@/app/_shared/components/ui/navigation-menu'
 
 interface Props {
   whiteboardName: string
+  description?: string
   spaceId?: number | null
 }
 
@@ -14,29 +21,33 @@ interface Props {
 export const WhiteboardNavigation = ({ whiteboardName, spaceId }: Props) => {
 
   return (
-    <nav className="z-[2] fixed inline-flex items-center justify-between bottom-16 md:bottom-4 right-[5%] left-[5%] md:right-[15%] md:left-[15%] lg:right-[30%] lg:left-[30%] bg-background rounded-full px-2 py-1 gap-2 border border-border">
-      <div className="inline-flex justify-start gap-2">
-        <Link href="/whiteboards" className="transition ease-in hover:text-secondary rounded-full p-2 hover:bg-secondary-foreground">
-          <Presentation />
-        </Link>
-
+    <NavigationMenu className="z-[2] fixed inline-flex items-center justify-between bottom-16 md:bottom-4 center-fixed bg-background rounded-md px-3 py-1 gap-2 border border-border">
+      <NavigationMenuList className="gap-2">
+        <NavigationMenuItem className="font-bold max-w-xs text-ellipsis">
+          {whiteboardName}
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href="/whiteboards">
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <Presentation />
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
         {
           spaceId && (
-            <Link href={`/spaces/${spaceId}`} className="transition ease-in hover:text-secondary rounded-full p-2 hover:bg-secondary-foreground">
-              <Group />
-            </Link>
+            <NavigationMenuItem>
+              <Link href={`/spaces/${spaceId}`}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Group />
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           )
-        }
-      </div>
-
-      <h1 className="font-bold max-w-xs text-ellipsis">{whiteboardName}</h1>
-
-      <div className="hidden md:block">
-        <ProfileCard /> 
-      </div>  
-      <div className="block md:hidden">
-        <ProfileMenu />
-      </div>
-    </nav>
+        }  
+        <NavigationMenuItem className="pt-1">
+          <ProfileMenu />
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }

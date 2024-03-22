@@ -30,13 +30,13 @@ export const ProfileMenu = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>{data.user.name}</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-sm">{data.user.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="cursor-pointer"
+          className="cursor-pointer text-sm"
           onClick={() => signOut({ callbackUrl: '/' })}
         >
-			Sign out
+			    Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

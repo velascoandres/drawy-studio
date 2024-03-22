@@ -34,11 +34,15 @@ export const DetachWhiteboardSpace = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-xl">Detach: <strong className="text-primary" >{whiteboard.name}</strong></DialogTitle>
+        <DialogTitle className="text-lg">Detach: <strong className="text-primary" >{whiteboard.name}</strong></DialogTitle>
       </DialogHeader>
 
-      <p className="px-2 font-semibold text-lg">
-        Are you sure to <strong className="text-red-500">detach</strong> the whiteboard from the space?
+      <p className="px-2 font-semibold">
+        Are you sure to <strong className="text-red-500">detach</strong> the whiteboard? 
+      </p>
+      
+      <p className="p-3 border rounded-sm text-sm bg-secondary">
+      the whiteboard will be detached from the space: <span className="text-indigo-400">&quot;{whiteboard.space?.name}&quot;</span>
       </p>
 
       <DialogFooter>
