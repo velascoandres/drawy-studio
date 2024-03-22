@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 
 import { TRPCReactProvider } from '@/trpc/react'
 
@@ -9,7 +9,7 @@ import { Toaster } from './_shared/components/ui/toaster'
 
 import '@/styles/globals.css'
 
-const inter = Inter({
+const dm_sans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
 })
@@ -41,7 +41,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans ${dm_sans.variable}`}>
         <AuthProvider>
           <ThemeProvider
             attribute="class"
