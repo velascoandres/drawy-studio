@@ -20,8 +20,8 @@ export const SigninProviders = () => {
         className="transition ease-in text-white hover:scale-105"
         onClick={() => signIn('github', CONFIG)}
       >
-        <Github className="mx-2 text-black dark:text-white" />
-        <span className="text-black dark:text-white">
+        <Github className="mx-2 text-white" />
+        <span className="text-white">
             Continue with Github
         </span>
             
@@ -32,8 +32,8 @@ export const SigninProviders = () => {
         className="transition ease-in  hover:scale-105"
         onClick={() => signIn('discord', CONFIG)}
       > 
-        <FaDiscord  className="dark:text-[#63e] w-7 h-7" />
-        <span className="dark:text-[#63e]">
+        <FaDiscord  className="text-[#63e] w-7 h-7" />
+        <span className="text-[#63e]">
             Continue with Discord
         </span>
             
