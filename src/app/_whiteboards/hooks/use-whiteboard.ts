@@ -1,13 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import compare from 'just-compare'
 
 import { type ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
 import { type AppState, type BinaryFiles } from '@excalidraw/excalidraw/types/types'
 
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
-import * as exportUtils from '@/lib/export-whiteboard' 
+import { b64encode } from '@/lib/base64'
+import { compressStream, JSONtoStream, responseToBuffer } from '@/lib/compress'
+import * as exportUtils from '@/lib/export-whiteboard'
 import { api } from '@/trpc/react'
 
 import { type Content } from '../components/whiteboard'
@@ -19,24 +21,24 @@ export const useWhiteboard = (id: number) => {
 
   const { data: whiteboard, isLoading } = api.whiteboard.findUserWhiteboardById.useQuery({
     id,
-  }, { 
+  }, {
     enabled: Boolean(id),
     cacheTime: Infinity,
     queryKey: ['whiteboard.findUserWhiteboardById', { id }],
   })
 
   const [currentWhiteboard, setWhiteboard] = useState<typeof whiteboard>(whiteboard)
+  const tmpContent = useRef<Record<string, unknown> | null>(null)
 
-  
   const { mutate: updateContent } = api.whiteboard.updateUserWhiteboardContent.useMutation({
     onSuccess: () => {
       void utils.whiteboard.findUserWhiteboardById.invalidate()
     },
-    onMutate: async ({ content }) => {
-      
+    onMutate: async () => {
+
       setWhiteboard({
         ...currentWhiteboard,
-        content,
+        content: tmpContent.current,
       } as typeof whiteboard)
 
       return { currentWhiteboard }
@@ -58,14 +60,14 @@ export const useWhiteboard = (id: number) => {
 
     const filterdElements = elements
     .filter(({ isDeleted }) => !isDeleted)
-    .map((element) =>({
+    .map((element) => ({
       ...element,
       customData: element.customData ?? null
     }))
 
     const payload = {
-      scene: { 
-        elements: filterdElements, 
+      scene: {
+        elements: filterdElements,
         appState: {
           viewBackgroundColor: appState.viewBackgroundColor,
           currentItemFontFamily: appState.currentItemFontFamily,
@@ -73,8 +75,8 @@ export const useWhiteboard = (id: number) => {
           theme: appState.theme,
           exportWithDarkMode: appState.exportWithDarkMode,
           gridSize: appState.gridSize,
-        }, 
-        scrollToContent: true, 
+        },
+        scrollToContent: true,
         files: filesToUpdate,
       },
     }
@@ -82,10 +84,19 @@ export const useWhiteboard = (id: number) => {
     const areSame = compare(payload, currentWhiteboard.content)
 
 
-    if (areSame){
+    if (areSame) {
       return
     }
-    
+
+    const content = {
+      scene: {
+        ...payload.scene,
+      },
+    }
+
+    tmpContent.current = content
+
+
     const updatedWhitheboard = {
       id: currentWhiteboard.id,
       content: {
@@ -95,9 +106,14 @@ export const useWhiteboard = (id: number) => {
       }
     }
 
-    updateContent(updatedWhitheboard)
-
-    void updatePreview(updatedWhitheboard as Whiteboard)
+    void compressStream(JSONtoStream(content))
+    .then(responseToBuffer)
+    .then(b64encode)
+    .then((compressedRawContent) => updateContent({
+      id: currentWhiteboard.id,
+      compressedRawContent
+    }))
+    .then(() => updatePreview(updatedWhitheboard as Whiteboard))
   }
 
   const onChangeHandler = (elements: ExcalidrawElement[], appState: AppState, files?: BinaryFiles) => {

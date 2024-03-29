@@ -13,5 +13,5 @@ export const UpdateWhiteboardDto = z.object({
 
 export const UpdateWhiteboardContentDto = z.object({
   id: z.number(),
-  content: z.unknown(),
+  compressedRawContent: z.string(),
 })
