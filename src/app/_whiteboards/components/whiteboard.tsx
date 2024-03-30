@@ -11,6 +11,8 @@ import {
   type ExcalidrawInitialDataState 
 } from '@excalidraw/excalidraw/types/types'
 
+import { decompressContent } from '@/lib/compress-whiteboard'
+
 
 export interface Content {
   scene: {
@@ -28,6 +30,13 @@ interface Props {
   id: number
   viewModeEnabled?: boolean
   initialContent?: Content
+  onChange?: WhiteboardChangeEventHandler
+}
+
+interface RawContentProps extends Omit<Props, 'initialContent'> {
+  id: number
+  viewModeEnabled?: boolean
+  initialRawCompressed?: string
   onChange?: WhiteboardChangeEventHandler
 }
 
@@ -96,4 +105,21 @@ export const Whiteboard = ({
     </Excalidraw>
   )
 }
-  
+
+
+export const WhiterboardFromCompressed = ({ initialRawCompressed,
+  ...rest
+}: RawContentProps) => {
+   
+  const [initialContent, setInitialContent] = useState<Content>()
+
+  useEffect(() => {
+    if (!initialRawCompressed){
+      return
+    }
+    void decompressContent(initialRawCompressed)
+    .then((content) => setInitialContent(content as unknown as Content))
+  }, [initialRawCompressed])
+
+  return <Whiteboard {...rest} initialContent={initialContent} />
+}
