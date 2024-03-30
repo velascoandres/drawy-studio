@@ -3,14 +3,14 @@ import { type Metadata,type ResolvingMetadata } from 'next'
 import { redirect } from 'next/navigation'
 
 import Loading from '@/app/(protected)/loading'
-import findPublicWhiteboardById from '@/server/api/whiteboard/usecases/find-public-whiteboard'
+import findWhiteboardInfo from '@/server/api/whiteboard/usecases/find-whiteboard-info'
 import { db } from '@/server/db'
 
 
 export async function generateMetadata({ params }: {params: {id: string}}, parent: ResolvingMetadata) {
   const id = Number(params.id)
 
-  const whiteboard = await findPublicWhiteboardById(db, { id, omitContent: true })
+  const whiteboard = await findWhiteboardInfo(db, { id, isPublic: true })
 
 
   if (!whiteboard){

@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { SearchByIdDto } from './shared-dtos'
+
 export const CreateWhiteboardDto = z.object({
   name: z.string().min(1, 'A name is required').max(30, 'The name must be a maximum of 30 characters.'),
   description: z.string().max(180, 'The description must be a maximum of 180 characters.').optional(),
@@ -15,3 +17,8 @@ export const UpdateWhiteboardContentDto = z.object({
   id: z.number(),
   compressedRawContent: z.string(),
 })
+
+
+export const SearchWhitheboard = z.object({
+  isPublic: z.boolean().optional(),
+}).merge(SearchByIdDto)

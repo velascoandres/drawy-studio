@@ -7,8 +7,7 @@ import { type ExcalidrawElement } from '@excalidraw/excalidraw/types/element/typ
 import { type AppState, type BinaryFiles } from '@excalidraw/excalidraw/types/types'
 
 import { useDebounceCallback } from '@/app/_shared/hooks/use-debounce-callback'
-import { b64encode } from '@/lib/base64'
-import { compressStream, JSONtoStream, responseToBuffer } from '@/lib/compress'
+import { compressContent } from '@/lib/compress-whiteboard'
 import * as exportUtils from '@/lib/export-whiteboard'
 import { api } from '@/trpc/react'
 
@@ -106,9 +105,7 @@ export const useWhiteboard = (id: number) => {
       }
     }
 
-    void compressStream(JSONtoStream(content))
-    .then(responseToBuffer)
-    .then(b64encode)
+    void compressContent(content)
     .then((compressedRawContent) => updateContent({
       id: currentWhiteboard.id,
       compressedRawContent
