@@ -45,7 +45,6 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
             <WhiteboardPreview name={name} previewUrl={previewUrl} />
             <div 
               className="h-full  transition ease-in bg-gradient-to-br from-gray-900 to-secondary/60 absolute bottom-0 w-full px-2 flex flex-col justify-between gap-2 break-words text-ellipsis"
-          
             >
               <div className="flex flex-col gap-2 pt-2">
                 <Link href={`/whiteboard/${whiteboard.id}`} className="cursor-pointer transition ease-in w-full">
@@ -53,8 +52,6 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
                     {name}
                   </h4>
                 </Link>
-
-
                 <p className="font-medium text-sm text-ellipsis text-pretty text-secondary/85 dark:text-primary/70">
                   {description}
                 </p>
@@ -62,10 +59,9 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
 
               <div className="inline-flex justify-start mb-2 gap-2 items-center">
                 { whiteboard.space && <Link href={`/spaces/${whiteboard.space.id}`} className="hover:scale-105 transition ease-in hover:border-primary"> <SpaceBadge space={whiteboard.space} /></Link>}
-                
               </div>
               {
-                whiteboard.isPublic && <Link target="_blank" href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-[#63e] rounded-tl-sm px-4 flex items-center gap-1 py-1">
+                whiteboard.isPublic && <Link href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-[#63e] text-white rounded-tl-sm px-4 flex items-center gap-1 py-1">
                   <ExternalLink className="h-4 w-4" /> <span className="text-sm">Public</span>
                 </Link>
               }
