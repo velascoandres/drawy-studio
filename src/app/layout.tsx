@@ -4,6 +4,7 @@ import { TRPCReactProvider } from '@/trpc/react'
 
 import { AuthProvider } from './_auth/components/auth-provider'
 import { ModalContainer } from './_shared/components/modal/modal-container'
+import { NavigationProgress } from './_shared/components/navigation/navigation-progress'
 import { ThemeProvider } from './_shared/components/theme/theme-provider'
 import { Toaster } from './_shared/components/ui/toaster'
 
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${dm_sans.variable}`}>
+        <NavigationProgress />
         <AuthProvider>
           <ThemeProvider
             attribute="class"
