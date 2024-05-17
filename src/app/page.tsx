@@ -8,7 +8,7 @@ import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_auth/components/sign-in-providers'
 import { AnimatedBagde } from './_shared/components/ui/animated-bagde'
-import { Card, CardDescription, CardHeader, CardTitle } from './_shared/components/ui/card'
+import { FeatCard } from './_shared/components/ui/feat-card'
 
 export default async function Home() {
   noStore()
@@ -74,20 +74,7 @@ export default async function Home() {
         <section className="flex flex-row flex-wrap items-center justify-center gap-3">
           {
             FEATURES.map(({ icon, title, description }, index) => (
-
-              <Card key={`feat-${index}`} className="relative backdrop-blur-sm bg-black/50 w-[350px] md:w-[300px] group rounded-lg transition ease-in hover:scale-105 border-neutral-700 p-2 cursor-pointer hover:bg-gradient-to-br from-black to-indigo-950 hover:border-indigo-400">
-                <CardHeader className="flex flex-col gap-2 items-center">
-                  <div className="group-hover:text-[#63e]">
-                    {icon}
-                  </div>
-                  <CardTitle className="transition ease-out duration-200 group-hover:text-white/45 text-xl font-bold self-center text-gray-400">
-                    {title}
-                  </CardTitle>
-                  <CardDescription className="transition ease-out duration-200 group-hover:text-gray-200 text-base/relaxed text-gray-400">
-                    {description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <FeatCard key={`feat-${index}`}  icon={icon} title={title} description={description} />
             ))
           }
         </section>
