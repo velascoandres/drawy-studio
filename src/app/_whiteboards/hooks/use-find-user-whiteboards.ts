@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { transformSpace } from '@/app/_spaces/utils/transform-space'
 import { api } from '@/trpc/react'
 
-const DEFAULT_PER_PAGE = 10
+const DEFAULT_PER_PAGE = 20
 
 interface Options {
   query?: {

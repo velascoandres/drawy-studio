@@ -27,7 +27,7 @@ export const useWhiteboardList = ({ query }: Options = { query: { spaceId: undef
     page: currentPage,
     query: {
       spaceId: query?.spaceId,
-      search: currentSearch
+      search: currentSearch,
     }
   })
 
