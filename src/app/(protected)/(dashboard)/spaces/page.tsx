@@ -49,21 +49,20 @@ const SpacePage = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 w-full gap-2">
             {spaces.map((space) => (
-              <SpaceCard 
-                key={`${space.id}-item`} 
-                space={space}
-                renderTitle={() => (
-                  <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="hover:underline">             
+              <Link key={`${space.id}-item`} href={`${NAVIGATION.SPACES.path}/${space.id}`}>
+                <SpaceCard    
+                  space={space}
+                  renderTitle={() => (
                     <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
-                  </Link>
-                )} 
-              >
-                <SpaceCardActions
-                  space={space} 
-                  onClickUpdate={openUpdateSpaceModal} 
-                  onClickRemove={openDeleteSpaceModal} 
-                />
-              </SpaceCard>
+                  )} 
+                >
+                  <SpaceCardActions
+                    space={space} 
+                    onClickUpdate={openUpdateSpaceModal} 
+                    onClickRemove={openDeleteSpaceModal} 
+                  />
+                </SpaceCard>
+              </Link>
             ))}
           </div>
           <Pagination
