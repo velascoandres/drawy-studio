@@ -13,11 +13,12 @@ import { WhiteboardActions,WhiteboardCard } from '@/app/_whiteboards/components/
 import { WhiteboardsSkeleton } from '@/app/_whiteboards/components/whiteboards-skeleton'
 import { useWhiteboardList } from '@/app/_whiteboards/hooks/use-whiteboard-list'
 import { IMAGES } from '@/constants/images'
+import { DEFAULT_SPACE } from '@/constants/spaces'
 import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
 const SpacePage = ({ params }: {params: {id: string}}) => {
-  const spaceId = Number(params.id)
+  const spaceId = params.id !== DEFAULT_SPACE ? Number(params.id) : null
 
   const { data: currentSpace } = api.space.findUserSpaceById.useQuery({
     id: spaceId
@@ -50,16 +51,11 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
     document.title = `${currentSpace.name} | Drawy`
   }, [currentSpace])
 
-
-  if (!currentSpace){
-    return null
-  }
-
   return (
     <ManagementPageLayout
-      title={currentSpace.name}
+      title={currentSpace?.name ?? DEFAULT_SPACE}
       addLabel="New Whiteboard"
-      onAddClick={() => openCreateWhiteboard(currentSpace.id)}
+      onAddClick={() => openCreateWhiteboard(currentSpace?.id)}
       onSearch={onSearchHandler}
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}

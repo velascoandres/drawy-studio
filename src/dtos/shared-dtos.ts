@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const SearchByIdDto = z.object({ id: z.number() })
+export const SearchByIdDto = z.object({ id: z.number().nullable() })
 
 
 export const SearchDto = z.object({

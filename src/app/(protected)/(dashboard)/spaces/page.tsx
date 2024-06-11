@@ -12,7 +12,6 @@ import { useSpaceList } from '@/app/_spaces/hooks/use-space-list'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
-
 const SpacePage = () => {
   const {
     page,

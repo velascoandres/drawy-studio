@@ -1,0 +1,1 @@
+export const DEFAULT_SPACE = 'Not asigned'

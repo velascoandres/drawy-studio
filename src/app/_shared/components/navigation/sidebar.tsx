@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 
 import { ProfileCard } from '@/app/_auth/components/profile-card'
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
+import { SpaceSelector } from '@/app/_spaces/components/space-selector'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
@@ -29,9 +30,13 @@ export const SideNavigation = () => {
       <div className="hidden md:px-2 md:block">
         <ProfileCard />
       </div>
-    
 
-      <nav className="flex-1 flex flex-col items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
+      <div className="hidden md:px-2 md:block mt-2">
+        <h3 className="text-sm text-pretty text-primary/60 mx-2">Workspace</h3>
+        <SpaceSelector />
+      </div>
+    
+      <nav className="flex-1 flex flex-col-reverse items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
 
         <ul className="text-sm inline-flex items-center gap-10 justify-center md:flex md:flex-col md:justify-start md:items-start md:w-full md:gap-2">
           {

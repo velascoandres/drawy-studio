@@ -1,12 +1,12 @@
-import { Group, Presentation } from 'lucide-react'
+import { Group } from 'lucide-react'
 
 
 export const NAVIGATION = {
-  WHITEBOARDS: {
-    path: '/whiteboards',
-    name: 'Whiteboards',
-    icon: Presentation
-  },
+  // WHITEBOARDS: {
+  //   path: '/whiteboards',
+  //   name: 'Whiteboards',
+  //   icon: Presentation
+  // },
   SPACES: {
     path: '/spaces',
     name: 'Spaces',
@@ -15,4 +15,4 @@ export const NAVIGATION = {
 } as const
 
 
-export const REDIRECT_PATH = NAVIGATION.WHITEBOARDS.path
+export const REDIRECT_PATH = NAVIGATION.SPACES.path
