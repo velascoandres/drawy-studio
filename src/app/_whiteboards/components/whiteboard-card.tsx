@@ -11,12 +11,10 @@ import {
   ContextMenuTrigger
 } from '@/app/_shared/components/ui/context-menu'
 import { toast } from '@/app/_shared/hooks/use-toast'
-import { SpaceBadge } from '@/app/_spaces/components/space-badge'
 
 import { type  Whiteboard } from '../interfaces/whiteboard'
 
 import { WhiteboardPreview } from './whiteboard-preview'
-
 
 interface ListItemProps {
     whiteboard: Omit<Whiteboard, 'content'>
@@ -55,10 +53,6 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
                 <p className="font-medium text-sm text-ellipsis text-pretty text-secondary/85 dark:text-primary/70">
                   {description}
                 </p>
-              </div>
-
-              <div className="inline-flex justify-start mb-2 gap-2 items-center">
-                { whiteboard.space && <Link href={`/spaces/${whiteboard.space.id}`} className="hover:scale-105 transition ease-in hover:border-primary"> <SpaceBadge space={whiteboard.space} /></Link>}
               </div>
               {
                 whiteboard.isPublic && <Link href={`${window.location.origin}/view-whiteboard/${whiteboard.id}`} className="absolute bottom-0 right-0 hover:underline self-end transition ease-in hover:border-primary bg-[#63e] text-white rounded-tl-sm px-4 flex items-center gap-1 py-1">

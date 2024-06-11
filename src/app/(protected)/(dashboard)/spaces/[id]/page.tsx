@@ -18,6 +18,8 @@ import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
 const SpacePage = ({ params }: {params: {id: string}}) => {
+  console.log(params.id)
+
   const spaceId = params.id !== DEFAULT_SPACE ? Number(params.id) : null
 
   const { data: currentSpace } = api.space.findUserSpaceById.useQuery({
@@ -53,16 +55,18 @@ const SpacePage = ({ params }: {params: {id: string}}) => {
 
   return (
     <ManagementPageLayout
-      title={currentSpace?.name ?? DEFAULT_SPACE}
+      title={currentSpace?.name ?? 'Not asigned'}
       addLabel="New Whiteboard"
       onAddClick={() => openCreateWhiteboard(currentSpace?.id)}
       onSearch={onSearchHandler}
       searchPlaceholder="Search whiteboards"
       searchValue={currentSearch}
       extraActions={[
-        <Button key="attach-action" variant="ghost" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center">
-          <Merge className="w-auto md:h-auto" /> <span className="hidden md:block"> Attach Whiteboard </span>
-        </Button>
+        spaceId ? (
+          <Button key="attach-action" variant="ghost" onClick={() => openAttachSpace(transformSpace(currentSpace))} className="flex-row gap-2 justify-center items-center">
+            <Merge className="w-auto md:h-auto" /> <span className="hidden md:block"> Attach Whiteboard </span>
+          </Button>  
+        ) : null
       ]}
     >
       <div className={cn('flex-1 flex flex-col gap-8 items-center w-full h-full justify-between mb-24 md:mb-0', {

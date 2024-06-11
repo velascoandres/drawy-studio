@@ -58,7 +58,7 @@ export const SpaceSelector = () => {
 
   return (
     <CustomDropdown
-      title="Workspaces"
+      title="Your spaces"
       items={spaceItems}
       onSelect={handleSelectSpace}
       renderActions={() => (

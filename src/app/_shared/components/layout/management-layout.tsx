@@ -26,6 +26,8 @@ export const ManagementPageLayout = ({
   searchValue,
   onSearch,
 }: Props) => {
+  const actions = React.Children.toArray(extraActions)
+
   return (
     <main className="overflow-y-auto py-2 flex flex-col gap-4 items-start min-h-screen w-full">  
       <header className="px-4 py-2 z-10 fixed top-0 w-full flex flex-row flex-wrap items-center border border-transparent border-b-border gap-2">
@@ -37,7 +39,7 @@ export const ManagementPageLayout = ({
           <Button variant="outline" onClick={onAddClick} className="hidden  z-0 py-1 px-4 w-auto md:flex flex-row gap-2 justify-center items-center">
             <Plus className="w-auto md:h-auto" /> <span className="hidden md:block">{addLabel}</span>
           </Button>
-          {extraActions}
+          {actions}
         </div>
       </header>
       <section className="flex-1 flex flex-col px-4 pt-32 md:pt-20 w-full h-full">

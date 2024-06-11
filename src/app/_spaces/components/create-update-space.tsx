@@ -102,72 +102,51 @@ export const CreateUpdateSpace = ({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
           <div className="flex flex-col items-start gap-4 w-full">
-            <div className="flex flex-col md:flex-row justify-between w-full gap-2">
-              <div className="flex flex-col w-full">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <FormLabel>Name*</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="My roadmaps"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>
-					    This is your space name.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="style.background.type"
-                  render={({ field }) => (
-                    <FormItem className="w-full" >
-                      <FormLabel>Background type</FormLabel>
-                      <FormControl>
-                        <Select {...field} onValueChange={(type: 'color' | 'gradient') => form.setValue('style.background.type', type) }>
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Background type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="color">Color</SelectItem>
-                            <SelectItem value="gradient">Gradient</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormDescription>
-					     Select a background type
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              
+            <div className="flex flex-col md:flex-row w-full gap-2">
               <FormField
                 control={form.control}
-                name="description"
+                name="name"
                 render={({ field }) => (
-                  <FormItem className="w-full" >
-                    <FormLabel>Description</FormLabel>
+                  <FormItem className="w-full">
+                    <FormLabel>Name*</FormLabel>
                     <FormControl>
-                      <Textarea rows={6} placeholder="my great space for..." {...field} />
+                      <Input
+                        placeholder="My roadmaps"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-					    Enter the space description
+					                This is your space name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="style.background.type"
+                render={({ field }) => (
+                  <FormItem className="w-full" >
+                    <FormLabel>Background type</FormLabel>
+                    <FormControl>
+                      <Select {...field} onValueChange={(type: 'color' | 'gradient') => form.setValue('style.background.type', type) }>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Background type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="color">Color</SelectItem>
+                          <SelectItem value="gradient">Gradient</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormDescription>
+					              Select a background type
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            
             <div className="overflow-y-auto max-h-64 p-2">
               <ColorSelector 
                 value={form.getValues('style.background.value')}
@@ -184,8 +163,6 @@ export const CreateUpdateSpace = ({
               space={{
                 id: 0,
                 name: form.watch('name') || '⚽️ name',
-                // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-                description: form.watch('description') || EXAMPLE_DESCRIPTION,
                 style: form.watch('style') ?? DEFAULT_STYLE,
               }}  
             />

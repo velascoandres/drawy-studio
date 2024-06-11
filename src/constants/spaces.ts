@@ -1,1 +1,1 @@
-export const DEFAULT_SPACE = 'Not asigned'
+export const DEFAULT_SPACE = 'pending'

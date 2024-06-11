@@ -74,13 +74,15 @@ export const CustomDropdown = ({
         <Command>
           <CommandInput placeholder={searchLabel} />
           <CommandEmpty>{emptyState}</CommandEmpty>
-          <h3 className="text-primary/65 font-medium text-pretty mx-2 my-1">{title}</h3>
+          <CommandGroup>
+            <h3 className="text-sm text-primary/65 font-medium text-pretty mx-2 my-1">{title}</h3>
+          </CommandGroup>
           <CommandGroup>
             {items.map((item) => (
               <CommandItem
                 key={item.value}
                 value={item.label}
-                className="cursor-pointer border border-border my-1"
+                className="cursor-pointer my-1"
                 onSelect={() => {
                   setSelectedValue(item.value.toString())
                   setOpen(false)
@@ -90,11 +92,13 @@ export const CustomDropdown = ({
                 <div className="inline-flex justify-start gap-2 w-full items-center">
                   {renderItem(item, currentValue === item.value.toString())}
                   {
-                    currentValue === item.value.toString() ? <CheckCircle2Icon className="w-5 h-5"/> : <Circle className="w-5 h-5"/> 
+                    currentValue === item.value.toString() && <CheckCircle2Icon className="w-5 h-5 text-primary/65"/>
                   }  
                 </div>
               </CommandItem>
             ))}
+          </CommandGroup>
+          <CommandGroup>
             {
               renderActions && (
                 <div className="mt-2 flex flex-col justify-center">
