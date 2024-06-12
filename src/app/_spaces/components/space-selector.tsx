@@ -1,22 +1,21 @@
 'use client'
 
 import React, { useMemo } from 'react'
-import { useRouter } from 'next/navigation'
 import { PlusIcon } from 'lucide-react'
 
 import { Button } from '@/app/_shared/components/ui/button'
 import { CustomDropdown, type DropdownItem } from '@/app/_shared/components/ui/custom-dropdown'
 import { Skeleton } from '@/app/_shared/components/ui/skeleton'
+import { useWorkspaceStore } from '@/app/_shared/store/workspace-store'
 import { SpaceMiniCard } from '@/app/_spaces/components/space-mini-card'
 import { useSpaceList } from '@/app/_spaces/hooks/use-space-list'
 import { type Space } from '@/app/_spaces/interfaces/space'
 import { DEFAULT_STYLE } from '@/constants/colors'
-import { NAVIGATION } from '@/constants/navigation'
 import { DEFAULT_SPACE } from '@/constants/spaces'
 
 
 export const SpaceSelector = () => {
-  const router = useRouter()
+  const store = useWorkspaceStore()
 
   const {
     isLoading,
@@ -48,8 +47,12 @@ export const SpaceSelector = () => {
     ]
   }, [spaces])
 
-  const handleSelectSpace = ({ value }: DropdownItem) => {
-    router.push(`${NAVIGATION.SPACES.path}/${value}`)
+  const handleSelectSpace = ({ value, data }: DropdownItem) => {
+    if (value === DEFAULT_SPACE){
+      void store.removeCurrentSpace()
+    } else{
+      void store.setCurrentSpace(data as Space)
+    }
   }
 
   if (isLoading){
@@ -60,6 +63,7 @@ export const SpaceSelector = () => {
     <CustomDropdown
       title="Your spaces"
       items={spaceItems}
+      value={store.currentSpace?.id.toString()}
       onSelect={handleSelectSpace}
       renderActions={() => (
         <Button onClick={openCreateSpaceModal} variant="ghost" className="inline-flex items-center justify-start gap-2 mt-1 w-full">

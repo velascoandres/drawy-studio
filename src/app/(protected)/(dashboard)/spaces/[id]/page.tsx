@@ -18,12 +18,12 @@ import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
 const SpacePage = ({ params }: {params: {id: string}}) => {
-  console.log(params.id)
-
   const spaceId = params.id !== DEFAULT_SPACE ? Number(params.id) : null
 
   const { data: currentSpace } = api.space.findUserSpaceById.useQuery({
     id: spaceId
+  }, {
+    enabled: Boolean(spaceId),
   })
 
   const {
