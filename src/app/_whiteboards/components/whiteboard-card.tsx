@@ -45,11 +45,9 @@ export const WhiteboardCard = ({ whiteboard, children }: ListItemProps) => {
               className="h-full  transition ease-in bg-gradient-to-br from-gray-900 to-secondary/60 absolute bottom-0 w-full px-2 flex flex-col justify-between gap-2 break-words text-ellipsis"
             >
               <div className="flex flex-col gap-2 pt-2">
-                <Link href={`/whiteboard/${whiteboard.id}`} className="cursor-pointer transition ease-in w-full">
-                  <h4 className="text-secondary dark:text-primary text-lg font-bold select-none flex items-center line-clamp-1 text-ellipsis hover:underline tracking-tight">
-                    {name}
-                  </h4>
-                </Link>
+                <h4 className="text-secondary dark:text-primary text-lg font-bold select-none flex items-center line-clamp-1 text-ellipsis hover:underline tracking-tight">
+                  {name}
+                </h4>
                 <p className="font-medium text-sm text-ellipsis text-pretty text-secondary/85 dark:text-primary/70">
                   {description}
                 </p>
@@ -87,7 +85,7 @@ export const WhiteboardActions = ({
   }
   
   return (
-    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md pointer-events-none">
       <ContextMenuItem
         onClick={onClickUpdate}
         className="cursor-pointer flex justify-start gap-2"

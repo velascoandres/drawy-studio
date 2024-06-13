@@ -10,18 +10,13 @@ import { type Space } from '../interfaces/space'
 import { transformSpace } from '../utils/transform-space'
 
 
-
 export const useSpaceList = () => {
   const { searchParams, setParam, removeParam } = useQueryParams()
 
   const { openModal } = useModalStore()
-  
-  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
-  
+    
   const { data: response, isLoading } = api.space.findUserSpaces.useQuery({
     search: searchParams.get('search') ?? '',
-    page: Number(searchParams.get('page') ?? 1),
-    perPage: 10
   })
 
   const spaces = useMemo(() => {
@@ -70,11 +65,8 @@ export const useSpaceList = () => {
   }
 
   return {
-    page,
     isLoading,
     spaces,
-    total: response?.total ?? 0,
-    totalPages: response?.totalPages ?? 0,
     openCreateSpaceModal,
     openDeleteSpaceModal,
     openUpdateSpaceModal,

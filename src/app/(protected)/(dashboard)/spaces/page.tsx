@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import { ManagementPageLayout } from '@/app/_shared/components/layout/management-layout'
 import { EmptyState } from '@/app/_shared/components/ui/empty-state'
-import { Pagination } from '@/app/_shared/components/ui/pagination'
 import { ShowContent } from '@/app/_shared/components/ui/show-content'
 import { SpaceCard, SpaceCardActions } from '@/app/_spaces/components/space-card'
 import { SpaceCardsSkeleton } from '@/app/_spaces/components/space-cards-skeleton'
@@ -14,14 +13,11 @@ import { cn } from '@/lib/utils'
 
 const SpacePage = () => {
   const {
-    page,
     isLoading,
     spaces,
-    totalPages,
     openCreateSpaceModal,
     openDeleteSpaceModal,
     openUpdateSpaceModal,
-    onPageChange,
     onSearchHandler
   } = useSpaceList()
 
@@ -51,9 +47,6 @@ const SpacePage = () => {
               <Link key={`${space.id}-item`} href={`${NAVIGATION.SPACES.path}/${space.id}`}>
                 <SpaceCard    
                   space={space}
-                  renderTitle={() => (
-                    <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
-                  )} 
                 >
                   <SpaceCardActions
                     space={space} 
@@ -64,11 +57,6 @@ const SpacePage = () => {
               </Link>
             ))}
           </div>
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            onPageChange={onPageChange}
-          />
         </ShowContent>
       </div>
     </ManagementPageLayout>

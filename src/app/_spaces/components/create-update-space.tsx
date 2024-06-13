@@ -31,7 +31,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/_shared/components/ui/select'
-import { Textarea } from '@/app/_shared/components/ui/textarea'
 import { COLORS, DEFAULT_STYLE, GRADIENT_COLORS, GRADIENT_COLORS_MAP } from '@/constants/colors'
 import { CreateSpaceDto } from '@/dtos/space-dtos'
 import { getTextColor } from '@/lib/get-text-color'
@@ -47,8 +46,6 @@ import { SpaceCard } from './space-card'
 interface Props {
 	space?: Space
 }
-
-const EXAMPLE_DESCRIPTION = 'my great space for Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum standard dummy text ever since the 1500s'
 
 export const CreateUpdateSpace = ({ 
   space,

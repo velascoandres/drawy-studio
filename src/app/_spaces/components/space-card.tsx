@@ -15,7 +15,6 @@ import { type Space } from '../interfaces/space'
 
 interface Props {
     space: Space
-    renderTitle?: (space: Space) => React.ReactNode
     children?: React.ReactNode | React.ReactNode[]
 }
 
@@ -29,20 +28,16 @@ interface SpaceCardActions {
 export const SpaceCard = ({
   space,
   children,
-  renderTitle,
 }: Props) => {
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <article  
-          className="overflow-hidden w-full min-w-[15rem]  md:max-w-sm transition ease-in group relative select-none h-15 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-secondary hover:border-primary dark:border-secondary dark:hover:border-primary"
-          style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
+          className="overflow-hidden w-full min-w-[15rem]  md:max-w-sm transition ease-in group relative select-none h-15 flex flex-row items-center gap-2 justify-start rounded-lg px-3 py-5 border border-border hover:bg-primary/15"
         >
-          {
-            renderTitle ? renderTitle(space) : <h3 className="text-3xl font-bold max-w-xs text-ellipsis">{space.name}</h3>
-          }
-
+          <div className="h-7 w-7 rounded-full" style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}></div>
+          <h3 className="text-2xl font-normal max-w-xs text-ellipsis">{space.name}</h3>
         </article>
         {children}
       </ContextMenuTrigger>
