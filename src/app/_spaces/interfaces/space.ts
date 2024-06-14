@@ -8,3 +8,8 @@ export interface Space {
     description?: string
     style: z.infer<typeof StyleDto>
 }
+
+
+export interface SpaceSummary extends Space {
+    totalWhiteboards: number
+}

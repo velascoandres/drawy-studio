@@ -24,7 +24,7 @@ export const useWorkspace = () => {
       return router.push(`${NAVIGATION.SPACES.path}/${DEFAULT_SPACE}`)
     }
   
-    router.push(`${NAVIGATION.SPACES.path}/${store.currentSpace.id}`)  
+    router.push(`${NAVIGATION.SPACES.path}/${space.id}`)  
   }
 
   const removeCurrentSpace = () => {

@@ -16,7 +16,7 @@ export const useSpaceList = () => {
 
   const { openModal } = useModalStore()
     
-  const { data: response, isLoading } = api.space.findUserSpaces.useQuery({
+  const { data: response, isLoading } = api.space.findUserSpacesSummary.useQuery({
     search: searchParams.get('search') ?? '',
   })
 

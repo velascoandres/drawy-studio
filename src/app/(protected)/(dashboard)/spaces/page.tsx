@@ -57,6 +57,7 @@ const SpacePage = () => {
                 <SpaceCard
                   key={space.id}
                   title={space.name}
+                  whiteboardsCount={space.totalWhiteboards}
                   background={space.style.background.value}
                   isActive={space.id === currentSpace?.id}
                   onClick={() => changeWorkspace(space)}

@@ -8,32 +8,33 @@ import { Button } from '@/app/_shared/components/ui/button'
 import { CustomDropdown, type DropdownItem } from '@/app/_shared/components/ui/custom-dropdown'
 import { Skeleton } from '@/app/_shared/components/ui/skeleton'
 import { SpaceMiniCard } from '@/app/_spaces/components/space-mini-card'
-import { useSpaceList } from '@/app/_spaces/hooks/use-space-list'
 import { type Space } from '@/app/_spaces/interfaces/space'
 import { DEFAULT_STYLE } from '@/constants/colors'
 import { NAVIGATION } from '@/constants/navigation'
 import { DEFAULT_SPACE } from '@/constants/spaces'
+import { api } from '@/trpc/react'
 
 import { useWorkspace } from '../hooks/use-workspace'
 
 
 export const SpaceSelector = () => {
   const { changeWorkspace, removeCurrentSpace, currentSpace } = useWorkspace()
-  const {
-    isLoading,
-    spaces,
-  } = useSpaceList()
+
+  const { data: response, isLoading } = api.space.findUserSpaces.useQuery({ search: '' })
+
   const router = useRouter()
+
+  console.log(currentSpace?.id)
     
   const spaceItems = useMemo(() => {
-    const spaceItems = spaces.map(
+    const spaceItems = response?.data?.map(
       (space) =>
             ({
               data: space,
               label: space.name,
               value: space.id,
             }) as DropdownItem,
-    )
+    ) ?? []
 
     return [
       {
@@ -47,7 +48,7 @@ export const SpaceSelector = () => {
       },
       ...spaceItems,
     ]
-  }, [spaces])
+  }, [response])
 
   const handleSelectSpace = ({ value, data }: DropdownItem) => {
     if (value === DEFAULT_SPACE){
@@ -68,6 +69,7 @@ export const SpaceSelector = () => {
 
   return (
     <CustomDropdown
+      key={currentSpace?.id}
       title="Your spaces"
       items={spaceItems}
       value={currentSpace?.id.toString()}
