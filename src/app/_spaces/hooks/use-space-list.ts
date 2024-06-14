@@ -12,6 +12,7 @@ import { transformSpace } from '../utils/transform-space'
 
 export const useSpaceList = () => {
   const { searchParams, setParam, removeParam } = useQueryParams()
+  const currentSearch = searchParams.get('search') ?? ''
 
   const { openModal } = useModalStore()
     
@@ -65,6 +66,7 @@ export const useSpaceList = () => {
   }
 
   return {
+    currentSearch,
     isLoading,
     spaces,
     openCreateSpaceModal,

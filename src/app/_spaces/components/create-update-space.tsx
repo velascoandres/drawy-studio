@@ -156,12 +156,9 @@ export const CreateUpdateSpace = ({
           <h3 className="font-bold">Space preview</h3>
 
           <div className="flex-1 inline-flex justify-center w-full">
-            <SpaceCard 
-              space={{
-                id: 0,
-                name: form.watch('name') || '⚽️ name',
-                style: form.watch('style') ?? DEFAULT_STYLE,
-              }}  
+            <SpaceCard
+              title={`${form.watch('name') || '⚽️ name'}`}
+              background={`${form.watch('style')?.background.value ?? DEFAULT_STYLE.background.value}`} 
             />
           </div>
           

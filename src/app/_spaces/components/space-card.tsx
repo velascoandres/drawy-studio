@@ -1,5 +1,5 @@
 import React from 'react'
-import { Edit, Trash2 } from 'lucide-react'
+import { Crown,Edit, Presentation, Trash2 } from 'lucide-react'
 
 import { 
   ContextMenu, 
@@ -9,13 +9,18 @@ import {
   ContextMenuTrigger
 } from '@/app/_shared/components/ui/context-menu'
 import { COLORS } from '@/constants/colors'
+import { cn } from '@/lib/utils'
 
 import { type Space } from '../interfaces/space'
 
 
 interface Props {
-    space: Space
+    title: string
+    background?: string
     children?: React.ReactNode | React.ReactNode[]
+    isActive?: boolean
+    whiteboardsCount?: number
+    onClick?: () => void
 }
 
 interface SpaceCardActions {
@@ -26,7 +31,11 @@ interface SpaceCardActions {
 
 
 export const SpaceCard = ({
-  space,
+  title,
+  background = COLORS[0],
+  isActive = false,
+  whiteboardsCount = 0,
+  onClick,
   children,
 }: Props) => {
 
@@ -34,10 +43,31 @@ export const SpaceCard = ({
     <ContextMenu>
       <ContextMenuTrigger>
         <article  
-          className="overflow-hidden w-full min-w-[15rem]  md:max-w-sm transition ease-in group relative select-none h-15 flex flex-row items-center gap-2 justify-start rounded-lg px-3 py-5 border border-border hover:bg-primary/15"
+          className={cn('relative overflow-hidden cursor-pointer w-full gap-4 min-w-[15rem]  md:max-w-sm transition ease-in group select-none h-28 flex flex-col rounded-lg px-3 py-5 border border-border hover:bg-primary/15', {
+            'bg-primary/10': isActive
+          })}
+          onClick={onClick}
         >
-          <div className="h-7 w-7 rounded-full" style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}></div>
-          <h3 className="text-2xl font-normal max-w-xs text-ellipsis">{space.name}</h3>
+          <Crown className={
+            cn('invisible absolute top-3 right-3', {
+              visible: isActive
+            })
+          } />
+          <div className={cn('absolute top-0 flex w-full justify-center invisible', {
+            visible: isActive
+          })}>
+            <div className="left-0 h-[1px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-white to-[rgba(17,17,17,0)] transition-all duration-1000" />
+          </div>
+          <header className="inline-flex items-center gap-2 justify-start">
+            <div 
+              className="h-7 w-7 rounded-full" 
+              style={{ background }}></div>
+            <h3 className="text-2xl font-normal max-w-xs text-ellipsis">{title}</h3>
+          </header>
+          <footer className="inline-flex gap-2 justify-start items-center">
+            <Presentation className="w-4 h-4 text-primary/45" /> 
+            <span className="text-xs text-pretty text-primary/45">{whiteboardsCount} whiteboards</span>
+          </footer>
         </article>
         {children}
       </ContextMenuTrigger>
@@ -51,7 +81,7 @@ export const SpaceCardActions = ({
   onClickUpdate,
 }: SpaceCardActions) => { 
   return (
-    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md pointer-events-none">
       <ContextMenuItem
         onClick={() => onClickUpdate(space)}
         className="cursor-pointer flex justify-start gap-2"

@@ -96,7 +96,7 @@ export const COLORS: string[] = [
 export const DEFAULT_STYLE: Space['style'] = {
   background: {
     type: 'color',
-    value: COLORS[4] ?? ''
+    value: COLORS[2] ?? ''
   },
   textColor: 'white'
 }

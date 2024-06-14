@@ -2,14 +2,9 @@ import { Group } from 'lucide-react'
 
 
 export const NAVIGATION = {
-  // WHITEBOARDS: {
-  //   path: '/whiteboards',
-  //   name: 'Whiteboards',
-  //   icon: Presentation
-  // },
   SPACES: {
     path: '/spaces',
-    name: 'Spaces',
+    name: 'Your spaces',
     icon: Group
   },
 } as const
