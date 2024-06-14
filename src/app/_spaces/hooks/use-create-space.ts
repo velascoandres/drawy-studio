@@ -14,6 +14,7 @@ export const useCreateSpace = () => {
   } = api.space.createSpace.useMutation({
     onSuccess: () => {
       void utils.space.findUserSpaces.invalidate()
+      void utils.space.findUserSpacesSummary.invalidate()
     
       toast({
         title: '✅ Space created',

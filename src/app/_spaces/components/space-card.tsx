@@ -9,7 +9,7 @@ import {
   ContextMenuTrigger
 } from '@/app/_shared/components/ui/context-menu'
 import { COLORS } from '@/constants/colors'
-import { cn } from '@/lib/utils'
+import { cn, withStopPropagation } from '@/lib/utils'
 
 import { type Space } from '../interfaces/space'
 
@@ -81,17 +81,17 @@ export const SpaceCardActions = ({
   onClickUpdate,
 }: SpaceCardActions) => { 
   return (
-    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md pointer-events-none">
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
       <ContextMenuItem
-        onClick={() => onClickUpdate(space)}
-        className="cursor-pointer flex justify-start gap-2"
+        onClick={withStopPropagation(() => onClickUpdate(space))}
+        className="cursor-pointer flex justify-start gap-2 pointer-events-none"
       >
         <Edit className="h-5 w-5" /> Edit
       </ContextMenuItem>
       <ContextMenuSeparator />
       <ContextMenuItem
-        onClick={() => onClickRemove(space)}
-        className="cursor-pointer flex justify-start gap-2 text-red-600"
+        onClick={withStopPropagation(() => onClickRemove(space))}
+        className="cursor-pointer flex justify-start gap-2 text-red-600 pointer-events-none"
       >
         <Trash2 className="h-5 w-5" /> Delete
       </ContextMenuItem>

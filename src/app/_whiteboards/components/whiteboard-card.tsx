@@ -11,6 +11,7 @@ import {
   ContextMenuTrigger
 } from '@/app/_shared/components/ui/context-menu'
 import { toast } from '@/app/_shared/hooks/use-toast'
+import { withStopPropagation } from '@/lib/utils'
 
 import { type  Whiteboard } from '../interfaces/whiteboard'
 
@@ -85,9 +86,9 @@ export const WhiteboardActions = ({
   }
   
   return (
-    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md pointer-events-none">
+    <ContextMenuContent className="dark:bg-popover/80 backdrop-blur-md">
       <ContextMenuItem
-        onClick={onClickUpdate}
+        onClick={withStopPropagation(onClickUpdate)}
         className="cursor-pointer flex justify-start gap-2"
       >
         <FilePenLine className="h-5 w-5" /> Edit information
@@ -96,7 +97,7 @@ export const WhiteboardActions = ({
       {
         whiteboard.isPublic && (
           <ContextMenuItem
-            onClick={() => handleCopyClipboard(`${window.location.origin}/view-whiteboard/${whiteboard.id}`)}
+            onClick={withStopPropagation(() => handleCopyClipboard(`${window.location.origin}/view-whiteboard/${whiteboard.id}`))}
             className="cursor-pointer flex justify-start gap-2"
           >
             <ExternalLink className="h-5 w-5" /> Copy public link
@@ -108,7 +109,7 @@ export const WhiteboardActions = ({
       {
         whiteboard.space && (
           <ContextMenuItem
-            onClick={onClickDetach}
+            onClick={withStopPropagation(onClickDetach)}
             className="cursor-pointer flex justify-start gap-2 text-red-600"
           >
             <Split className="h-5 w-5" /> Detach from space
@@ -116,7 +117,7 @@ export const WhiteboardActions = ({
         )
       }          
       <ContextMenuItem
-        onClick={onClickDelete}
+        onClick={withStopPropagation(onClickDelete)}
         className="cursor-pointer flex justify-start gap-2 text-red-600"
       >
         <Trash2 className="h-5 w-5" /> Delete
