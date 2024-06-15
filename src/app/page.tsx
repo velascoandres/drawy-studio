@@ -1,13 +1,12 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
-import { ChevronRight, Coffee, Github } from 'lucide-react'
+import { Coffee, Github } from 'lucide-react'
 
 import { FEATURES } from '@/constants/features'
 import { LINKS } from '@/constants/links'
 import { getServerAuthSession } from '@/server/auth'
 
-import { SigninProviders } from './_auth/components/sign-in-providers'
-import { AnimatedBagde } from './_shared/components/ui/animated-bagde'
+import { ContinueDashboardButton, SigninProviders } from './_auth/components/sign-in-providers'
 import { FeatCard } from './_shared/components/ui/feat-card'
 
 export default async function Home() {
@@ -54,23 +53,10 @@ export default async function Home() {
           </p>
 
           {
-            session ? (
-              <Link
-                href="/whiteboards"
-                className="flex items-center transition ease-in group rounded-full text-white pl-4 pr-2 py-3 font-semibold no-underline "
-              >
-                <AnimatedBagde style="purple">
-                  <span className="transition ease-in text-white group-hover:text-[#63e]">Continue to dashboard </span>
-                  <ChevronRight className="transition text-white ease-out duration-200 group-hover:translate-x-1 group-hover:text-[#63e]" />
-                </AnimatedBagde>
-              </Link>) : (
-              <SigninProviders />
-            )
+            session ? <ContinueDashboardButton /> : <SigninProviders />
           }
 
         </section>
-
-
         <section className="flex flex-row flex-wrap items-center justify-center gap-3">
           {
             FEATURES.map(({ icon, title, description }, index) => (
