@@ -22,6 +22,7 @@ export const RemoveSpace = ({
   const { mutate: deleteSpace } = api.space.removeSpace.useMutation({
     onSuccess() {
       void utils.space.findUserSpaces.invalidate()
+      void utils.space.findUserSpacesSummary.invalidate()
 
       toast({
         title: '🚨 Deleted',
@@ -35,10 +36,10 @@ export const RemoveSpace = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-lg">Delete: <strong className="text-primary-400" >{space.name}</strong></DialogTitle>
+        <DialogTitle className="text-lg">Delete: {space.name}</DialogTitle>
       </DialogHeader>
 
-      <p className="px-2 font-semibold">
+      <p className="font-semibold text-pretty text-sm">
         Are you sure to <strong className="text-red-500">delete</strong> the space?
       </p>
 

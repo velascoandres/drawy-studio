@@ -2,12 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { ProfileCard } from '@/app/_auth/components/profile-card'
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
+import { SpaceSelector } from '@/app/_spaces/components/space-selector'
 import { NAVIGATION } from '@/constants/navigation'
-import { cn } from '@/lib/utils'
 
 import { ThemeToggler } from '../theme/theme-toggler'
 
@@ -18,8 +17,6 @@ import { Settings } from './settings'
 const menuItems = Object.values(NAVIGATION)
 
 export const SideNavigation = () => {
-  const pathname = usePathname()
-
   return (
     <aside className="flex flex-col md:py-4 bottom-2 md:w-[200px] fixed z-20  backdrop-blur-md left-[15%] right-[15%] rounded-lg border border-border md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-border">
       <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-primary">
@@ -29,18 +26,19 @@ export const SideNavigation = () => {
       <div className="hidden md:px-2 md:block">
         <ProfileCard />
       </div>
-    
 
-      <nav className="flex-1 flex flex-col items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
+      <div className="hidden md:px-2 md:block mt-2">
+        <SpaceSelector />
+      </div>
+    
+      <nav className="flex-1 flex flex-col-reverse items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
 
         <ul className="text-sm inline-flex items-center gap-10 justify-center md:flex md:flex-col md:justify-start md:items-start md:w-full md:gap-2">
           {
             menuItems.map(({ name, icon: IconComponent, path }) => (
               <li 
                 key={`menu-${name}`}
-                className={cn('group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent text-gray-400 md:hover:border-border md:rounded-xl text-sm', {
-                  'text-primary md:bg-primary-foreground': pathname === path || pathname.includes(path)
-                })}
+                className="group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent text-gray-400 md:hover:border-border md:rounded-xl text-sm"
               >
                 <Link href={path} className=" group-hover:text-primary inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full md:px-4 md:py-2 ">
                   <IconComponent className="md:w-5" />

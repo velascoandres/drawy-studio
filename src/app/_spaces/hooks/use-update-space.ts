@@ -14,6 +14,7 @@ export const useUpdateSpace = () => {
   } = api.space.updateUserSpace.useMutation({
     onSuccess: (response) => {
       void utils.space.findUserSpaces.invalidate()
+      void utils.space.findUserSpacesSummary.invalidate()
 
       if (!response){
         return

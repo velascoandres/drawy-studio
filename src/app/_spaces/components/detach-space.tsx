@@ -5,6 +5,8 @@ import { useModalStore } from '@/app/_shared/store/modal-store'
 import { type Whiteboard } from '@/app/_whiteboards/interfaces/whiteboard'
 import { api } from '@/trpc/react'
 
+import { SpaceMiniCard } from './space-mini-card'
+
 interface Props {
 	whiteboard: Omit<Whiteboard, 'content'>
 }
@@ -34,16 +36,26 @@ export const DetachWhiteboardSpace = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-lg">Detach: <strong className="text-primary" >{whiteboard.name}</strong></DialogTitle>
+        <DialogTitle className="text-lg">Detach: {whiteboard.name}</DialogTitle>
       </DialogHeader>
 
-      <p className="px-2 font-semibold">
+      <p className="font-normal text-sm">
         Are you sure to <strong className="text-red-500">detach</strong> the whiteboard? 
       </p>
       
-      <p className="p-3 border rounded-sm text-sm bg-secondary">
-      the whiteboard will be detached from the space: <span className="text-indigo-400">&quot;{whiteboard.space?.name}&quot;</span>
+      <p className="text-pretty text-sm text-primary/65">
+        The whiteboard will be detached from the space: 
       </p>
+
+      <div className="p-3 border border-border rounded-sm flex flex-col gap-2"> 
+        <div className="self-center">
+          <SpaceMiniCard 
+            title={whiteboard.space!.name} 
+            background={whiteboard.space!.style.background.value} 
+          />
+        </div> 
+      </div>
+
 
       <DialogFooter>
         <Button

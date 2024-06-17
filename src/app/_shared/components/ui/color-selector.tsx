@@ -22,13 +22,13 @@ export const ColorSelector = ({
   }
 
   return (
-    <div className="flex flex-wrap justify-start gap-1">
+    <div className="flex flex-wrap justify-start gap-2">
       {
         options.map(value => (
           <div 
             key={`color-${value}`} 
             className={cn(
-              'transition ease-in w-12 h-12 cursor-pointer border-4 border-border rounded-md', {
+              'transition ease-in w-10 h-10 cursor-pointer border border-border rounded-full', {
                 'scale-105 ring ring-primary': value === selectedColor
               },
             )} 
