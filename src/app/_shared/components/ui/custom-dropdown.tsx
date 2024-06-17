@@ -10,26 +10,26 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 import { Separator } from './separator'
 
-export interface DropdownItem {
+export interface DropdownItem<T> {
     value: number | string
     label: string
-    data: unknown
+    data: T
 }
 
-interface Props {
+interface Props <T> {
     title?: string
-    items: DropdownItem[]
+    items: DropdownItem<T>[]
     placeholder?: string
     searchLabel?: string
     value?: number | string
     emptyState?: string
     renderActions?: () => React.ReactNode  
-    onSelect: (item: DropdownItem) => void 
-    children: (item: DropdownItem, selected: boolean) => React.ReactNode
+    onSelect:(item: DropdownItem<T>) => void 
+    children: (item: DropdownItem<T>, selected: boolean) => React.ReactNode
 }
 
 
-export const CustomDropdown = ({
+export const CustomDropdown =  <T,>({
   title,
   items,
   value,
@@ -39,7 +39,7 @@ export const CustomDropdown = ({
   onSelect,
   children: renderItem,
   renderActions,
-}: Props) => {
+}: Props<T>) => {
   const [currentValue, setSelectedValue] = useState(value?.toString())
   const [isOpen, setOpen] = useState(false)
 

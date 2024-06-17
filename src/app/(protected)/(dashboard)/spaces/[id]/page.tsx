@@ -9,6 +9,7 @@ import { Button } from '@/app/_shared/components/ui/button'
 import { EmptyState } from '@/app/_shared/components/ui/empty-state'
 import { Pagination } from '@/app/_shared/components/ui/pagination'
 import { ShowContent } from '@/app/_shared/components/ui/show-content'
+import { type Space } from '@/app/_spaces/interfaces/space'
 import { transformSpace } from '@/app/_spaces/utils/transform-space'
 import {
   WhiteboardActions,
@@ -62,7 +63,7 @@ const SpacePage = ({ params }: { params: { id: string } }) => {
 
   return (
     <ManagementPageLayout
-      title={currentSpace?.name ?? 'Not asigned'}
+      title={currentSpace?.name ?? 'Default space'}
       addLabel="New Whiteboard"
       onAddClick={() => openCreateWhiteboard(currentSpace?.id)}
       onSearch={onSearchHandler}
@@ -73,7 +74,7 @@ const SpacePage = ({ params }: { params: { id: string } }) => {
           <Button
             key="attach-action"
             variant="ghost"
-            onClick={() => openAttachSpace(transformSpace(currentSpace))}
+            onClick={() => openAttachSpace(currentSpace as Space)}
             className="flex-row items-center justify-center gap-2"
           >
             <Merge className="w-auto md:h-auto" />{' '}

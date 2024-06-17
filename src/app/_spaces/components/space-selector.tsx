@@ -33,7 +33,7 @@ export const SpaceSelector = () => {
               data: space,
               label: space.name,
               value: space.id,
-            }) as DropdownItem,
+            }) as DropdownItem<Space>,
     ) ?? []
 
     return [
@@ -50,13 +50,13 @@ export const SpaceSelector = () => {
     ]
   }, [response])
 
-  const handleSelectSpace = ({ value, data }: DropdownItem) => {
+  const handleSelectSpace = ({ value, data }: DropdownItem<Space>) => {
     if (value === DEFAULT_SPACE){
       removeCurrentSpace()
       
       return
     }
-    changeWorkspace(data as Space)
+    changeWorkspace(data)
   }
 
   const navigateToSpaces = () => {
@@ -72,7 +72,7 @@ export const SpaceSelector = () => {
       key={currentSpace?.id}
       title="Your spaces"
       items={spaceItems}
-      value={currentSpace?.id.toString()}
+      value={currentSpace?.id.toString() ?? DEFAULT_SPACE}
       onSelect={handleSelectSpace}
       renderActions={() => (
         <Button onClick={navigateToSpaces} variant="ghost" className="inline-flex items-center justify-start gap-2 mt-1 w-full">
@@ -83,7 +83,14 @@ export const SpaceSelector = () => {
         </Button>
       )}
     >
-      {(item) => <SpaceMiniCard space={item.data as Space} />}
+      {({ data }) => <SpaceMiniCard title={data.name} background={data.style.background.value} isDefault={!Boolean(data.id)} />}
     </CustomDropdown>
   )
 }
+
+
+
+
+
+
+

@@ -24,10 +24,10 @@ export const DeleteWhiteboard = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-lg">Delete: <strong className="text-primary" >{whiteboard.name}</strong></DialogTitle>
+        <DialogTitle className="text-lg">Delete: {whiteboard.name}</DialogTitle>
       </DialogHeader>
   
-      <p className="px-2 font-semibold">
+      <p className="px-2 font-semibold text-sm text-pretty">
           Are you sure to <strong className="text-red-500">delete</strong> the whiteboard?
       </p>
   
