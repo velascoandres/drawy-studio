@@ -2,9 +2,15 @@ import React from 'react'
 import { signOut, useSession } from 'next-auth/react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/_shared/components/ui/avatar'
+import { useWorkspace } from '@/app/_spaces/hooks/use-workspace'
 
 export const ProfileCard = () => {
   const { data } = useSession()
+  const { removeCurrentSpace } = useWorkspace()
+
+  const handleLogout = () => {
+    void signOut({ callbackUrl: '/' }).then(removeCurrentSpace)
+  }
 
   if (!data?.user) {
     return null
@@ -20,7 +26,7 @@ export const ProfileCard = () => {
       </Avatar>
       <div className="mx-2 [&>span]:block text-start text-sm">
         <span>{data.user.name}</span>
-        <div role="button" className="cursor-pointer text-gray-600 hover:underline" onClick={() => signOut({ callbackUrl: '/' })}>
+        <div role="button" className="cursor-pointer text-gray-600 hover:underline" onClick={handleLogout}>
           <span>Sign out</span>
         </div>
       </div>

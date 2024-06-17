@@ -20,7 +20,7 @@ export const useWorkspace = () => {
       title: `Changed workspace to: ${space.name}`
     })
 
-    if (!store.currentSpace){
+    if (!space.id){
       return router.push(`${NAVIGATION.SPACES.path}/${DEFAULT_SPACE}`)
     }
   

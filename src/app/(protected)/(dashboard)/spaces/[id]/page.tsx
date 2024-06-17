@@ -10,7 +10,6 @@ import { EmptyState } from '@/app/_shared/components/ui/empty-state'
 import { Pagination } from '@/app/_shared/components/ui/pagination'
 import { ShowContent } from '@/app/_shared/components/ui/show-content'
 import { type Space } from '@/app/_spaces/interfaces/space'
-import { transformSpace } from '@/app/_spaces/utils/transform-space'
 import {
   WhiteboardActions,
   WhiteboardCard,
