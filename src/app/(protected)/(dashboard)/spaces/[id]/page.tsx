@@ -26,7 +26,7 @@ const SpacePage = ({ params }: { params: { id: string } }) => {
 
   const { data: currentSpace } = api.space.findUserSpaceById.useQuery(
     {
-      id: spaceId,
+      id: spaceId ?? 0,
     },
     {
       enabled: Boolean(spaceId),

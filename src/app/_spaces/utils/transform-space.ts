@@ -8,7 +8,7 @@ interface RawSpace {
     name: string;
     description: string | null
     style: unknown; 
-    totalWhiteboards: number
+    totalWhiteboards?: number
 }
   
 export const transformSpace = (space?: RawSpace | null): SpaceSummary => {
