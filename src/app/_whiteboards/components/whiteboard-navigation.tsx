@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Group,Presentation } from 'lucide-react'
+import { Group } from 'lucide-react'
 
 import { ProfileMenu } from '@/app/_auth/components/profile-menu'
 import { 
@@ -27,23 +27,12 @@ export const WhiteboardNavigation = ({ whiteboardName, spaceId }: Props) => {
           {whiteboardName}
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/whiteboards">
+          <Link href={spaceId ? `/spaces/${spaceId}`: '/spaces/pending'}>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <Presentation />
+              <Group />
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        {
-          spaceId && (
-            <NavigationMenuItem>
-              <Link href={`/spaces/${spaceId}`}>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  <Group />
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          )
-        }  
         <NavigationMenuItem className="pt-1">
           <ProfileMenu />
         </NavigationMenuItem>
